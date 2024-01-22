@@ -6,6 +6,9 @@ import lombok.Getter;
 public class Member {
     
     private Long userSeq;
+    private Long companySeq;
+    private Long organSeq;
+    private int authSeq;
     private String userId;
     private String userPass;
     private String userName;
