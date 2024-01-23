@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.ooweat.mappers.AuthMapper">
+  <select id="findAllByMember" parameterType="string"
+    resultType="kr.co.ooweat.member.domain.Member">
+    SELECT SEQ         AS SEQ,
+           COMPANY_SEQ AS COMPANYSEQ,
+           ORGAN_SEQ   AS ORGANSEQ,
+           AUTH_SEQ    AS AUTHSEQ,
+           ID          AS USERID,
+           PASSWORD    AS USERPASS,
+           NAME        AS USERNAME,
+           PHONE       AS USERPHONE,
+           EMAIL       AS USEREMAIL,
+           USE_YN      AS USEYN,
+           CREATE_DATE AS CREATEDATE,
+           MODIFY_DATE AS MODIFYDATE
+    FROM TB_MEMBER
+    WHERE ID = #{userId}
+      AND PASSWORD = #{userPass}
+  </select>
+</mapper>

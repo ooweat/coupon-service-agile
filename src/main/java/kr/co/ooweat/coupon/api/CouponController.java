@@ -20,10 +20,7 @@ public class CouponController {
     }
 
     @GetMapping("/config")
-    public List<CouponConfigResponse> find(
-            final Member authMember,
-            @RequestParam("company-seq") final Long companySeq
-    ) {
-        return couponService.findAllByCompanySeq(authMember, companySeq);
+    public List<CouponConfigResponse> find(final Member authMember) {
+        return couponService.findConfigByCompanySeq(authMember);
     }
 }
