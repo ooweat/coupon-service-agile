@@ -13,7 +13,7 @@ public class ConfigResponse {
     private String fixedUsableCount;
     private String fixedIssuanceAmount;
     private String merchantName;
-    private String sendCount;
+    private String binCode;
     private char useYn;
     
     private ConfigResponse(){
@@ -29,7 +29,7 @@ public class ConfigResponse {
         this.fixedUsableCount = couponConfig.getFixedUsableCount();
         this.fixedIssuanceAmount = couponConfig.getFixedIssuanceAmount();
         this.merchantName = couponConfig.getMerchantName();
-        this.sendCount = couponConfig.getSendCount();
+        this.binCode = couponConfig.getBinCode();
         this.useYn = couponConfig.getUseYn();
     }
 }

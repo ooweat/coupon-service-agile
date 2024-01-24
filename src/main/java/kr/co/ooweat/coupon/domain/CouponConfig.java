@@ -18,7 +18,7 @@ public class CouponConfig extends BaseTimeEntity {
     private String fixedUsableCount;
     private String fixedIssuanceAmount;
     private String merchantName;
-    private String sendCount;
+    private String binCode;
     private char useYn;
     
     public CouponConfig(ConfigRequest configRequest) {
@@ -30,7 +30,7 @@ public class CouponConfig extends BaseTimeEntity {
         this.fixedUsableCount = configRequest.getFixedUsableCount();
         this.fixedIssuanceAmount = configRequest.getFixedIssuanceAmount();
         this.merchantName = configRequest.getMerchantName();
-        this.sendCount = configRequest.getSendCount();
+        this.binCode = configRequest.getBinCode();
         this.useYn = configRequest.getUseYn();
     }
 }

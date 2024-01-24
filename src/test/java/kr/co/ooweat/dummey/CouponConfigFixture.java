@@ -7,10 +7,10 @@ import lombok.Getter;
 public enum CouponConfigFixture {
     
     COMPANY_1(1L, 1L, "100", "10000",
-        "90", "1", "10000", "ooweat", "15", 'Y'),
+        "90", "1", "10000", "ooweat", "525252", 'Y'),
     COMPANY_2(2L, 2L, "10", "10000",
         "30", "1", "10000",
-        "ooweat", "1", 'Y'),
+        "ooweat", "525252", 'Y'),
     ;
     
     private final Long seq;
@@ -21,12 +21,12 @@ public enum CouponConfigFixture {
     private final String fixedUsableCount;
     private final String fixedIssuanceAmount;
     private final String merchantName;
-    private final String sendCount;
+    private final String binCode;
     private final char useYn;
     
     CouponConfigFixture(Long seq, Long companySeq, String issuanceMaxCount,
         String issuanceMaxAmount, String issuanceMaxValidity, String fixedUsableCount,
-        String fixedIssuanceAmount, String merchantName, String sendCount, char useYn) {
+        String fixedIssuanceAmount, String merchantName, String binCode, char useYn) {
         this.seq = seq;
         this.companySeq = companySeq;
         
@@ -36,14 +36,14 @@ public enum CouponConfigFixture {
         this.fixedUsableCount = fixedUsableCount;
         this.fixedIssuanceAmount = fixedIssuanceAmount;
         this.merchantName = merchantName;
-        this.sendCount = sendCount;
+        this.binCode = binCode;
         this.useYn = useYn;
     }
     
     public ConfigRequest createCouponConfig() {
         ConfigRequest configRequest = new ConfigRequest(seq, companySeq, issuanceMaxCount,
             issuanceMaxAmount, issuanceMaxValidity, fixedUsableCount,
-            fixedIssuanceAmount, merchantName, sendCount, useYn);
+            fixedIssuanceAmount, merchantName, binCode, useYn);
         return configRequest;
     }
 }

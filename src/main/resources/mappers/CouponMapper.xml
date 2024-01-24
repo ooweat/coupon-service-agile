@@ -11,7 +11,7 @@
            FIXED_USABLE_COUNT    AS FIXEDUSABLECOUNT,
            FIXED_ISSUANCE_AMOUNT AS FIXEDISSUANCEAMOUNT,
            MERCHANT_NAME         AS MERCHANTNAME,
-           SEND_COUNT            AS SENDCOUNT,
+           BIN_CODE            AS BIN_CODE,
            USE_YN                AS USEYN,
            CREATE_DATE           AS CREATEDATE,
            MODIFY_DATE           AS MODIFYDATE
@@ -21,9 +21,9 @@
   <update id="save" parameterType="kr.co.ooweat.coupon.domain.CouponConfig">
     INSERT INTO TB_COUPON_CONFIG (
                                   COMPANY_SEQ, ISSUANCE_MAX_COUNT, ISSUANCE_MAX_AMOUNT, ISSUANCE_MAX_VALIDITY,
-                                  FIXED_USABLE_COUNT, FIXED_ISSUANCE_AMOUNT, MERCHANT_NAME, SEND_COUNT, USE_YN, CREATE_DATE)
+                                  FIXED_USABLE_COUNT, FIXED_ISSUANCE_AMOUNT, MERCHANT_NAME, BIN_CODE, USE_YN, CREATE_DATE)
     VALUES (#{companySeq}, #{issuanceMaxCount}, #{issuanceMaxAmount}, #{issuanceMaxValidity},
-            #{fixedUsableCount}, #{fixedIssuanceAmount}, #{merchantName}, #{sendCount}, #{useYn}, NOW())
+            #{fixedUsableCount}, #{fixedIssuanceAmount}, #{merchantName}, #{binCode}, #{useYn}, NOW())
     ON DUPLICATE KEY
     UPDATE
       COMPANY_SEQ = #{companySeq},
@@ -33,7 +33,7 @@
       FIXED_USABLE_COUNT = #{fixedUsableCount},
       FIXED_ISSUANCE_AMOUNT = #{fixedIssuanceAmount},
       MERCHANT_NAME = #{merchantName},
-      SEND_COUNT = #{sendCount},
+      BIN_CODE = #{binCode},
       USE_YN = #{useYn},
       MODIFY_DATE = NOW()
   </update>

@@ -14,7 +14,7 @@ public class ConfigRequest extends BaseTimeEntity {
     private String fixedUsableCount;
     private String fixedIssuanceAmount;
     private String merchantName;
-    private String sendCount;
+    private String binCode;
     private char useYn;
     
     public ConfigRequest(final CouponConfig couponConfig){
@@ -26,14 +26,14 @@ public class ConfigRequest extends BaseTimeEntity {
         this.fixedUsableCount = couponConfig.getFixedUsableCount();
         this.fixedIssuanceAmount = couponConfig.getFixedIssuanceAmount();
         this.merchantName = couponConfig.getMerchantName();
-        this.sendCount = couponConfig.getSendCount();
+        this.binCode = couponConfig.getBinCode();
         this.useYn = couponConfig.getUseYn();
     }
     
     public ConfigRequest(final Long seq, final Long companySeq, final String issuanceMaxCount,
         final String issuanceMaxAmount, final String issuanceMaxValidity,
         final String fixedUsableCount, final String fixedIssuanceAmount, final String merchantName,
-        final String sendCount, final char useYn) {
+        final String binCode, final char useYn) {
         this.seq = seq;
         this.companySeq = companySeq;
         this.issuanceMaxCount = issuanceMaxCount;
@@ -42,7 +42,7 @@ public class ConfigRequest extends BaseTimeEntity {
         this.fixedUsableCount = fixedUsableCount;
         this.fixedIssuanceAmount = fixedIssuanceAmount;
         this.merchantName = merchantName;
-        this.sendCount = sendCount;
+        this.binCode = binCode;
         this.useYn = useYn;
     }
 }

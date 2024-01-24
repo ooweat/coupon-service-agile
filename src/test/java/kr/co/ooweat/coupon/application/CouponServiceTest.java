@@ -54,7 +54,7 @@ public class CouponServiceTest {
         couponService.save(COMPANY_1.createCouponConfig());
         ConfigResponse response = couponService.findConfigByCompanySeq(member.getCompanySeq());
         //then
-        assertThat(response.getSendCount()).isEqualTo(COMPANY_1.getSendCount());
+        assertThat(response.getBinCode()).isEqualTo(COMPANY_1.getBinCode());
     }
     
     @DisplayName("쿠폰 설정 업데이트")
@@ -71,7 +71,7 @@ public class CouponServiceTest {
         couponService.save(COMPANY_1.createCouponConfig());
         ConfigResponse response = couponService.findConfigByCompanySeq(member.getCompanySeq());
         // then
-        assertThat(response.getSendCount()).isEqualTo(COMPANY_1.getSendCount());
+        assertThat(response.getBinCode()).isEqualTo(COMPANY_1.getBinCode());
     }
     
     @DisplayName("쿠폰 설정 제거")
