@@ -9,7 +9,7 @@ public class ConfigResponse {
     private Long companySeq;
     private String issuanceMaxCount;
     private String issuanceMaxAmount;
-    private String issuanceMaxValidity;
+    private String issuanceLimitDays;
     private String fixedUsableCount;
     private String fixedIssuanceAmount;
     private String merchantName;
@@ -25,7 +25,7 @@ public class ConfigResponse {
         this.companySeq = couponConfig.getCompanySeq();
         this.issuanceMaxCount = couponConfig.getIssuanceMaxCount();
         this.issuanceMaxAmount = couponConfig.getIssuanceMaxAmount();
-        this.issuanceMaxValidity = couponConfig.getIssuanceMaxValidity();
+        this.issuanceLimitDays = couponConfig.getIssuanceLimitDays();
         this.fixedUsableCount = couponConfig.getFixedUsableCount();
         this.fixedIssuanceAmount = couponConfig.getFixedIssuanceAmount();
         this.merchantName = couponConfig.getMerchantName();

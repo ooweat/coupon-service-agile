@@ -10,7 +10,7 @@ public class ConfigRequest extends BaseTimeEntity {
     private Long companySeq;
     private String issuanceMaxCount;
     private String issuanceMaxAmount;
-    private String issuanceMaxValidity;
+    private String issuanceLimitDays;
     private String fixedUsableCount;
     private String fixedIssuanceAmount;
     private String merchantName;
@@ -22,7 +22,7 @@ public class ConfigRequest extends BaseTimeEntity {
         this.companySeq = couponConfig.getCompanySeq();
         this.issuanceMaxCount = couponConfig.getIssuanceMaxCount();
         this.issuanceMaxAmount = couponConfig.getIssuanceMaxAmount();
-        this.issuanceMaxValidity = couponConfig.getIssuanceMaxValidity();
+        this.issuanceLimitDays = couponConfig.getIssuanceLimitDays();
         this.fixedUsableCount = couponConfig.getFixedUsableCount();
         this.fixedIssuanceAmount = couponConfig.getFixedIssuanceAmount();
         this.merchantName = couponConfig.getMerchantName();
@@ -31,14 +31,14 @@ public class ConfigRequest extends BaseTimeEntity {
     }
     
     public ConfigRequest(final Long seq, final Long companySeq, final String issuanceMaxCount,
-        final String issuanceMaxAmount, final String issuanceMaxValidity,
+        final String issuanceMaxAmount, final String issuanceLimitDays,
         final String fixedUsableCount, final String fixedIssuanceAmount, final String merchantName,
         final String binCode, final char useYn) {
         this.seq = seq;
         this.companySeq = companySeq;
         this.issuanceMaxCount = issuanceMaxCount;
         this.issuanceMaxAmount = issuanceMaxAmount;
-        this.issuanceMaxValidity = issuanceMaxValidity;
+        this.issuanceLimitDays = issuanceLimitDays;
         this.fixedUsableCount = fixedUsableCount;
         this.fixedIssuanceAmount = fixedIssuanceAmount;
         this.merchantName = merchantName;

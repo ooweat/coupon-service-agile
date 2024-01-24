@@ -15,10 +15,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @Slf4j
 @SpringBootTest
-public class CouponServiceTest {
+public class ConfigServiceTest {
     
     @Autowired
-    private CouponService couponService;
+    private ConfigService configService;
     
     @Autowired
     private AuthService authService;
@@ -38,7 +38,7 @@ public class CouponServiceTest {
         // given
         Member member = 로그인();
         // when
-        ConfigResponse configResponse = couponService.findConfigByCompanySeq(
+        ConfigResponse configResponse = configService.findConfigByCompanySeq(
             member.getCompanySeq());
         // then
         assertThat(member.getUserPhone()).isNotEmpty();
@@ -51,8 +51,8 @@ public class CouponServiceTest {
         //인증된 멤버가 자신의 설정 정보를 조회 후, 업데이트 한다.
         // given & when
         Member member = 로그인();
-        couponService.save(COMPANY_1.createCouponConfig());
-        ConfigResponse response = couponService.findConfigByCompanySeq(member.getCompanySeq());
+        configService.save(COMPANY_1.createCouponConfig());
+        ConfigResponse response = configService.findConfigByCompanySeq(member.getCompanySeq());
         //then
         assertThat(response.getBinCode()).isEqualTo(COMPANY_1.getBinCode());
     }
@@ -63,13 +63,13 @@ public class CouponServiceTest {
         //인증된 멤버가 자신의 설정 정보를 조회 후, 업데이트 한다.
         // given
         Member member = 로그인();
-        ConfigResponse configResponse = couponService.findConfigByCompanySeq(
+        ConfigResponse configResponse = configService.findConfigByCompanySeq(
             member.getCompanySeq());
         assertThat(configResponse).isNotNull();
         
         // when
-        couponService.save(COMPANY_1.createCouponConfig());
-        ConfigResponse response = couponService.findConfigByCompanySeq(member.getCompanySeq());
+        configService.save(COMPANY_1.createCouponConfig());
+        ConfigResponse response = configService.findConfigByCompanySeq(member.getCompanySeq());
         // then
         assertThat(response.getBinCode()).isEqualTo(COMPANY_1.getBinCode());
     }

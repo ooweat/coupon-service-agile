@@ -4,7 +4,7 @@ CREATE TABLE TB_COUPON_CONFIG
     COMPANY_SEQ           MEDIUMINT   NOT NULL COMMENT '소속 SEQ',
     ISSUANCE_MAX_COUNT    SMALLINT    NOT NULL DEFAULT 0 COMMENT '(한달)한도 발권 량: 0=무제한',
     ISSUANCE_MAX_AMOUNT   MEDIUMINT   NOT NULL DEFAULT 0 COMMENT '(한달)한도 발권 금액: 0=무제한',
-    ISSUANCE_MAX_VALIDITY INT         NOT NULL DEFAULT 30 COMMENT '(기본값)유효기간 (발급일로부터 +n일)',
+    ISSUANCE_LIMIT_DAYS   SMALLINT    NOT NULL DEFAULT 30 COMMENT '(기본값)유효기간 (발급일로부터 +n일)',
     FIXED_USABLE_COUNT    TINYINT     NOT NULL DEFAULT 1 COMMENT '기본값 쿠폰 사용 가능 횟수',
     FIXED_ISSUANCE_AMOUNT MEDIUMINT   NULL COMMENT '기본값 발권 금액',
     MERCHANT_NAME         VARCHAR(50) NULL COMMENT '쿠폰에 표기될 사용처 명칭',
@@ -45,7 +45,7 @@ CREATE TABLE TB_COUPON_ISSUANCE
 (
     SEQ             INT AUTO_INCREMENT COMMENT 'SEQ' PRIMARY KEY,
     COMPANY_SEQ     MEDIUMINT                            NOT NULL COMMENT '소속 SEQ',
-    MEMBER_SEQ           INT                                  NOT NULL COMMENT 'TB_MEMBER 의 SEQ',
+    MEMBER_SEQ      INT                                  NOT NULL COMMENT 'TB_MEMBER 의 SEQ',
     ISSUANCE_DATE   VARCHAR(8)                           NOT NULL COMMENT '발권일자: YYYYMMDD',
     EXPIRE_DATE     VARCHAR(8)                           NOT NULL COMMENT '만료일자: YYYYMMDD',
     COUPON_NO       VARCHAR(100)                         NOT NULL COMMENT '쿠폰번호: 난수 포함 20자리',

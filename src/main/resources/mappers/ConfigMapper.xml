@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.co.ooweat.mappers.CouponMapper">
-  <select id="findAllByCompanySeq" parameterType="Long" resultType="kr.co.ooweat.coupon.domain.CouponConfig">
+<mapper namespace="kr.co.ooweat.coupon.mappers.ConfigMapper">
+  <select id="findAllByCompanySeq" parameterType="Long"
+    resultType="kr.co.ooweat.coupon.domain.CouponConfig">
     SELECT SEQ,
            COMPANY_SEQ           AS COMPANYSEQ,
            ISSUANCE_MAX_COUNT    AS ISSUANCEMAXCOUNT,
            ISSUANCE_MAX_AMOUNT   AS ISSUANCEMAXAMOUNT,
-           ISSUANCE_MAX_VALIDITY AS ISSUANCEMAXVALIDITY,
+           ISSUANCE_LIMIT_DAYS   AS ISSUANCELIMITDAYS,
            FIXED_USABLE_COUNT    AS FIXEDUSABLECOUNT,
            FIXED_ISSUANCE_AMOUNT AS FIXEDISSUANCEAMOUNT,
            MERCHANT_NAME         AS MERCHANTNAME,
-           BIN_CODE            AS BIN_CODE,
+           BIN_CODE              AS BIN_CODE,
            USE_YN                AS USEYN,
            CREATE_DATE           AS CREATEDATE,
            MODIFY_DATE           AS MODIFYDATE
@@ -19,17 +20,18 @@
     WHERE COMPANY_SEQ = #{companySeq}
   </select>
   <update id="save" parameterType="kr.co.ooweat.coupon.domain.CouponConfig">
-    INSERT INTO TB_COUPON_CONFIG (
-                                  COMPANY_SEQ, ISSUANCE_MAX_COUNT, ISSUANCE_MAX_AMOUNT, ISSUANCE_MAX_VALIDITY,
-                                  FIXED_USABLE_COUNT, FIXED_ISSUANCE_AMOUNT, MERCHANT_NAME, BIN_CODE, USE_YN, CREATE_DATE)
-    VALUES (#{companySeq}, #{issuanceMaxCount}, #{issuanceMaxAmount}, #{issuanceMaxValidity},
-            #{fixedUsableCount}, #{fixedIssuanceAmount}, #{merchantName}, #{binCode}, #{useYn}, NOW())
-    ON DUPLICATE KEY
+    INSERT INTO TB_COUPON_CONFIG (COMPANY_SEQ, ISSUANCE_MAX_COUNT, ISSUANCE_MAX_AMOUNT,
+                                  ISSUANCE_LIMIT_DAYS
+                                    FIXED_USABLE_COUNT, FIXED_ISSUANCE_AMOUNT, MERCHANT_NAME,
+                                  BIN_CODE, USE_YN, CREATE_DATE)
+    VALUES (#{companySeq}, #{issuanceMaxCount}, #{issuanceMaxAmount}, #{issuanceLimitDays},
+            #{fixedUsableCount}, #{fixedIssuanceAmount}, #{merchantName}, #{binCode}, #{useYn},
+            NOW()) ON DUPLICATE KEY
     UPDATE
       COMPANY_SEQ = #{companySeq},
       ISSUANCE_MAX_COUNT = #{issuanceMaxCount},
       ISSUANCE_MAX_AMOUNT = #{issuanceMaxAmount},
-      ISSUANCE_MAX_VALIDITY = #{issuanceMaxValidity},
+      ISSUANCE_LIMIT_DAYS = #{issuanceLimitDays},
       FIXED_USABLE_COUNT = #{fixedUsableCount},
       FIXED_ISSUANCE_AMOUNT = #{fixedIssuanceAmount},
       MERCHANT_NAME = #{merchantName},
@@ -38,7 +40,8 @@
       MODIFY_DATE = NOW()
   </update>
   <delete id="delete" parameterType="Long">
-    DELETE FROM TB_COUPON_CONFIG
+    DELETE
+    FROM TB_COUPON_CONFIG
     WHERE SEQ = #{seq}
   </delete>
 </mapper>

@@ -17,7 +17,7 @@ public enum CouponConfigFixture {
     private final Long companySeq;
     private final String issuanceMaxCount;
     private final String issuanceMaxAmount;
-    private final String issuanceMaxValidity;
+    private final String issuanceLimitDays;
     private final String fixedUsableCount;
     private final String fixedIssuanceAmount;
     private final String merchantName;
@@ -25,14 +25,14 @@ public enum CouponConfigFixture {
     private final char useYn;
     
     CouponConfigFixture(Long seq, Long companySeq, String issuanceMaxCount,
-        String issuanceMaxAmount, String issuanceMaxValidity, String fixedUsableCount,
+        String issuanceMaxAmount, String issuanceLimitDays, String fixedUsableCount,
         String fixedIssuanceAmount, String merchantName, String binCode, char useYn) {
         this.seq = seq;
         this.companySeq = companySeq;
         
         this.issuanceMaxCount = issuanceMaxCount;
         this.issuanceMaxAmount = issuanceMaxAmount;
-        this.issuanceMaxValidity = issuanceMaxValidity;
+        this.issuanceLimitDays = issuanceLimitDays;
         this.fixedUsableCount = fixedUsableCount;
         this.fixedIssuanceAmount = fixedIssuanceAmount;
         this.merchantName = merchantName;
@@ -42,7 +42,7 @@ public enum CouponConfigFixture {
     
     public ConfigRequest createCouponConfig() {
         ConfigRequest configRequest = new ConfigRequest(seq, companySeq, issuanceMaxCount,
-            issuanceMaxAmount, issuanceMaxValidity, fixedUsableCount,
+            issuanceMaxAmount, issuanceLimitDays, fixedUsableCount,
             fixedIssuanceAmount, merchantName, binCode, useYn);
         return configRequest;
     }

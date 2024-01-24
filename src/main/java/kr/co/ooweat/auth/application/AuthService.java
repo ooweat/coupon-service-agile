@@ -1,6 +1,6 @@
 package kr.co.ooweat.auth.application;
 
-import kr.co.ooweat.mappers.AuthMapper;
+import kr.co.ooweat.auth.mappers.AuthMapper;
 import kr.co.ooweat.member.domain.Member;
 import org.springframework.stereotype.Service;
 

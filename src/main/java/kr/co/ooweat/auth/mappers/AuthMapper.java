@@ -1,4 +1,4 @@
-package kr.co.ooweat.mappers;
+package kr.co.ooweat.auth.mappers;
 
 import kr.co.ooweat.member.domain.Member;
 import org.apache.ibatis.annotations.Mapper;

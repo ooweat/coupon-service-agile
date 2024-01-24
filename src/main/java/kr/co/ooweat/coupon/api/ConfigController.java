@@ -1,7 +1,7 @@
 package kr.co.ooweat.coupon.api;
 
 import javax.validation.Valid;
-import kr.co.ooweat.coupon.application.CouponService;
+import kr.co.ooweat.coupon.application.ConfigService;
 import kr.co.ooweat.coupon.application.dto.ConfigRequest;
 import kr.co.ooweat.coupon.application.dto.ConfigResponse;
 import org.springframework.http.ResponseEntity;
@@ -16,27 +16,27 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/coupon/config")
 public class ConfigController {
-    private CouponService couponService;
+    private ConfigService configService;
 
-    public ConfigController(final CouponService couponService){
-        this.couponService = couponService;
+    public ConfigController(final ConfigService configService){
+        this.configService = configService;
     }
     
     @GetMapping
     public ResponseEntity<ConfigResponse> find(@RequestParam Long companySeq) {
-        ConfigResponse response = couponService.findConfigByCompanySeq(companySeq);
+        ConfigResponse response = configService.findConfigByCompanySeq(companySeq);
         return ResponseEntity.ok(response);
     }
     
     @PostMapping
     public ResponseEntity<Void> save(@RequestBody @Valid final ConfigRequest configRequest) {
-        couponService.save(configRequest);
+        configService.save(configRequest);
         return ResponseEntity.ok().build();
     }
     
     @DeleteMapping
     public ResponseEntity<Void> deleteBySeq(@RequestParam Long seq) {
-        couponService.deleteBySeq(seq);
+        configService.deleteBySeq(seq);
         return ResponseEntity.noContent().build();
     }
 }

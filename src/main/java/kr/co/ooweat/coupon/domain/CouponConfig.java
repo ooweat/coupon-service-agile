@@ -14,7 +14,7 @@ public class CouponConfig extends BaseTimeEntity {
     private Long companySeq;
     private String issuanceMaxCount;
     private String issuanceMaxAmount;
-    private String issuanceMaxValidity;
+    private String issuanceLimitDays;
     private String fixedUsableCount;
     private String fixedIssuanceAmount;
     private String merchantName;
@@ -26,7 +26,7 @@ public class CouponConfig extends BaseTimeEntity {
         this.companySeq = configRequest.getCompanySeq();
         this.issuanceMaxCount = configRequest.getIssuanceMaxCount();
         this.issuanceMaxAmount = configRequest.getIssuanceMaxAmount();
-        this.issuanceMaxValidity = configRequest.getIssuanceMaxValidity();
+        this.issuanceLimitDays = configRequest.getIssuanceLimitDays();
         this.fixedUsableCount = configRequest.getFixedUsableCount();
         this.fixedIssuanceAmount = configRequest.getFixedIssuanceAmount();
         this.merchantName = configRequest.getMerchantName();

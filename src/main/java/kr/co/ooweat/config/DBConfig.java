@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
 @Configuration
-@MapperScan(value = "kr.co.ooweat.mappers", sqlSessionFactoryRef = "couponSqlSessionFactory")
+@MapperScan(value = "kr.co.ooweat.*.mappers", sqlSessionFactoryRef = "couponSqlSessionFactory")
 public class DBConfig {
     
     @Primary
@@ -30,7 +30,7 @@ public class DBConfig {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(couponDataSource);
         sqlSessionFactoryBean.setTypeAliasesPackage("kr.co.ooweat.model");
-        sqlSessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath:mappers/*.xml"));
+        sqlSessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath:*/mappers/*.xml"));
         return sqlSessionFactoryBean.getObject();
     }
     
