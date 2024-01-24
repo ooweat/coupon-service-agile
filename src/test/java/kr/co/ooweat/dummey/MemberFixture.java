@@ -5,10 +5,8 @@ import lombok.Getter;
 
 public enum MemberFixture {
 
-    OOWEAT(0L, "ooweat", "ooweat!@#$", ""),
+    OOWEAT("ooweat", "ooweat!@#$", ""),
     ;
-    @Getter
-    private final Long companySeq;
     @Getter
     private final String userId;
     @Getter
@@ -16,15 +14,14 @@ public enum MemberFixture {
     @Getter
     private final String userToken;
     
-    MemberFixture(final Long companySeq, final String userId, final String userPass, final String userToken) {
-        this.companySeq = companySeq;
+    MemberFixture(final String userId, final String userPass, final String userToken) {
         this.userId = userId;
         this.userPass = userPass;
         this.userToken = userToken;
     }
     
     public Member createLogin(){
-        Member member = new Member(companySeq, userId, userPass, userToken);
+        Member member = new Member(userId, userPass, userToken);
         return member;
     }
 }
