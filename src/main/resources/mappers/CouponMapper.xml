@@ -2,20 +2,34 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.ooweat.mappers.CouponMapper">
-  <select id="findAllByCompanySeq" parameterType="kr.co.ooweat.member.domain.Member" resultType="kr.co.ooweat.coupon.domain.CouponConfig">
+  <select id="findAllByCompanySeq" parameterType="Long" resultType="kr.co.ooweat.coupon.domain.CouponConfig">
     SELECT SEQ,
-           COMPANY_SEQ,
-           ISSUANCE_MAX_COUNT,
-           ISSUANCE_MAX_AMOUNT,
-           ISSUANCE_MAX_VALIDITY,
-           FIXED_USABLE_COUNT,
-           FIXED_ISSUANCE_AMOUNT,
-           MERCHANT_NAME,
-           SEND_COUNT,
-           USE_YN,
-           CREATE_DATE,
-           MODIFY_DATE
+           COMPANY_SEQ           AS COMPANYSEQ,
+           ISSUANCE_MAX_COUNT    AS ISSUANCEMAXCOUNT,
+           ISSUANCE_MAX_AMOUNT   AS ISSUANCEMAXAMOUNT,
+           ISSUANCE_MAX_VALIDITY AS ISSUANCEMAXVALIDITY,
+           FIXED_USABLE_COUNT    AS FIXEDUSABLECOUNT,
+           FIXED_ISSUANCE_AMOUNT AS FIXEDISSUANCEAMOUNT,
+           MERCHANT_NAME         AS MERCHANTNAME,
+           SEND_COUNT            AS SENDCOUNT,
+           USE_YN                AS USEYN,
+           CREATE_DATE           AS CREATEDATE,
+           MODIFY_DATE           AS MODIFYDATE
     FROM TB_COUPON_CONFIG
     WHERE COMPANY_SEQ = #{companySeq}
   </select>
+  <update id="save" parameterType="kr.co.ooweat.coupon.domain.CouponConfig">
+    UPDATE TB_COUPON_CONFIG
+    SET COMPANY_SEQ = #{companySeq},
+        ISSUANCE_MAX_COUNT    = #{issuanceMaxCount},
+        ISSUANCE_MAX_AMOUNT   = #{issuanceMaxAmount},
+        ISSUANCE_MAX_VALIDITY = #{issuanceMaxValidity},
+        FIXED_USABLE_COUNT    = #{fixedUsableCount},
+        FIXED_ISSUANCE_AMOUNT = #{fixedIssuanceAmount},
+        MERCHANT_NAME         = #{merchantName},
+        SEND_COUNT            = #{sendCount},
+        USE_YN                = #{useYn},
+        MODIFY_DATE           = NOW()
+    WHERE SEQ = #{seq}
+  </update>
 </mapper>

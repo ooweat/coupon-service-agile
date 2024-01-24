@@ -1,12 +1,11 @@
 package kr.co.ooweat.coupon.application;
 
-import kr.co.ooweat.coupon.application.dto.CouponConfigResponse;
+import kr.co.ooweat.coupon.application.dto.ConfigRequest;
+import kr.co.ooweat.coupon.application.dto.ConfigResponse;
+import kr.co.ooweat.coupon.domain.CouponConfig;
 import kr.co.ooweat.mappers.CouponMapper;
-import kr.co.ooweat.member.domain.Member;
 import org.springframework.stereotype.Service;
-
-//TODO: Autowired 를 최대한 지양하는 버릇들이기
-import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class CouponService {
@@ -16,7 +15,13 @@ public class CouponService {
         this.couponMapper = couponMapper;
     }
     
-    public List<CouponConfigResponse> findConfigByCompanySeq(Member authMember) {
-        return couponMapper.findAllByCompanySeq(authMember);
+    public ConfigResponse findConfigByCompanySeq(Long companySeq) {
+        return new ConfigResponse(couponMapper.findAllByCompanySeq(companySeq));
+    }
+    
+    @Transactional
+    public void updateCouponConfig(ConfigRequest configRequest) {
+        final CouponConfig config = new CouponConfig(configRequest);
+        couponMapper.save(config);
     }
 }

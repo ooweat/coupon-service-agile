@@ -1,12 +1,11 @@
 package kr.co.ooweat.mappers;
 
-import java.util.List;
-import kr.co.ooweat.coupon.application.dto.CouponConfigResponse;
-import kr.co.ooweat.member.domain.Member;
+import kr.co.ooweat.coupon.domain.CouponConfig;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface CouponMapper {
-    List<CouponConfigResponse> findAllByCompanySeq(Member authMember);
+    CouponConfig findAllByCompanySeq(Long companySeq);
     
+    void save(CouponConfig couponConfig);
 }
