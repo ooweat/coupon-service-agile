@@ -1,6 +1,6 @@
 CREATE TABLE TB_COUPON_CONFIG
 (
-    SEQ                   INT AUTO_INCREMENT PRIMARY KEY COMMENT 'SEQ',
+    SEQ                   MEDIUMINT AUTO_INCREMENT PRIMARY KEY COMMENT 'SEQ',
     COMPANY_SEQ           MEDIUMINT   NOT NULL COMMENT '소속 SEQ',
     ISSUANCE_MAX_COUNT    SMALLINT    NOT NULL DEFAULT 0 COMMENT '(한달)한도 발권 량: 0=무제한',
     ISSUANCE_MAX_AMOUNT   MEDIUMINT   NOT NULL DEFAULT 0 COMMENT '(한달)한도 발권 금액: 0=무제한',
@@ -20,7 +20,7 @@ CREATE INDEX IDX_TB_COUPON_CONFIG01
 
 CREATE TABLE TB_MEMBER
 (
-    SEQ         INT AUTO_INCREMENT COMMENT 'SEQ' PRIMARY KEY COMMENT 'SEQ',
+    SEQ         MEDIUMINT AUTO_INCREMENT COMMENT 'SEQ' PRIMARY KEY COMMENT 'SEQ',
     COMPANY_SEQ MEDIUMINT    NOT NULL COMMENT '소속 SEQ',
     ORGAN_SEQ   MEDIUMINT    NOT NULL COMMENT '조직 SEQ',
     AUTH_SEQ    SMALLINT     NOT NULL COMMENT '권한 SEQ',
@@ -43,26 +43,26 @@ CREATE INDEX IDX_TB_MEMBER03
 
 CREATE TABLE TB_COUPON_ISSUANCE
 (
-    SEQ             INT AUTO_INCREMENT COMMENT 'SEQ' PRIMARY KEY,
-    COMPANY_SEQ     MEDIUMINT                            NOT NULL COMMENT '소속 SEQ',
-    MEMBER_SEQ      INT                                  NOT NULL COMMENT 'TB_MEMBER 의 SEQ',
-    ISSUANCE_DATE   VARCHAR(8)                           NOT NULL COMMENT '발권일자: YYYYMMDD',
-    EXPIRE_DATE     VARCHAR(8)                           NOT NULL COMMENT '만료일자: YYYYMMDD',
-    COUPON_NO       VARCHAR(100)                         NOT NULL COMMENT '쿠폰번호: 난수 포함 20자리',
-    ISSUANCE_AMOUNT INT      DEFAULT 0                   NOT NULL COMMENT '발권금액',
-    REMAIN_AMOUNT   INT      DEFAULT 0                   NOT NULL COMMENT '잔여금액',
-    REMAIN_COUNT    INT      DEFAULT 0                   NOT NULL COMMENT '할인정보 - GIFT: 0 / DISG: 금액할인 / DISP: 할인율 * 상품금액 / RUSE: USE_COUNT',
-    STATUS          CHAR     DEFAULT 'N'                 NOT NULL COMMENT '쿠폰상태:
+    SEQ             MEDIUMINT AUTO_INCREMENT COMMENT 'SEQ' PRIMARY KEY,
+    COMPANY_SEQ     MEDIUMINT                             NOT NULL COMMENT '소속 SEQ',
+    MEMBER_SEQ      MEDIUMINT                             NOT NULL COMMENT 'TB_MEMBER 의 SEQ',
+    ISSUANCE_DATE   VARCHAR(8)                            NOT NULL COMMENT '발권일자: YYYYMMDD',
+    EXPIRE_DATE     VARCHAR(8)                            NOT NULL COMMENT '만료일자: YYYYMMDD',
+    COUPON_NO       VARCHAR(100)                          NOT NULL COMMENT '쿠폰번호: 난수 포함 20자리',
+    ISSUANCE_AMOUNT MEDIUMINT DEFAULT 0                   NOT NULL COMMENT '발권금액',
+    REMAIN_AMOUNT   MEDIUMINT DEFAULT 0                   NOT NULL COMMENT '잔여금액',
+    REMAIN_COUNT    SMALLINT  DEFAULT 0                   NOT NULL COMMENT '잔여사용가능횟수',
+    STATUS          CHAR      DEFAULT 'N'                 NOT NULL COMMENT '쿠폰상태:
 	: N - NORMAL 정상
 	  L - LOCK      잠금
 	  E - EXPIRE    만료
 	  U - USE 사용
 	  H - Hide 숨김(제거)',
-    SEND_TYPE       CHAR     DEFAULT 'M'                 NOT NULL COMMENT '발송타입: M - 메일 / S - SMS / K - 카카오톡',
-    SEND_INFO       VARCHAR(200)                         NULL COMMENT '수신정보: 암호화',
-    SEND_COUNT      INT      DEFAULT 1                   NOT NULL COMMENT '알림톡 발송횟수: 발행시 기본 1',
-    CREATE_DATE     DATETIME DEFAULT CURRENT_TIMESTAMP() NOT NULL COMMENT '생성일자',
-    MODIFY_DATE     DATETIME                             NULL COMMENT '수정일자',
+    SEND_TYPE       CHAR      DEFAULT 'M'                 NOT NULL COMMENT '발송타입: M - 메일 / S - SMS / K - 카카오톡',
+    SEND_INFO       VARCHAR(200)                          NULL COMMENT '수신정보: 암호화',
+    SEND_COUNT      SMALLINT  DEFAULT 1                   NOT NULL COMMENT '알림톡 발송횟수: 발행시 기본 1',
+    CREATE_DATE     DATETIME  DEFAULT CURRENT_TIMESTAMP() NOT NULL COMMENT '생성일자',
+    MODIFY_DATE     DATETIME                              NULL COMMENT '수정일자',
     CONSTRAINT UIX_TB_COUPON_ISSUANCE
         UNIQUE (COUPON_NO)
 )
