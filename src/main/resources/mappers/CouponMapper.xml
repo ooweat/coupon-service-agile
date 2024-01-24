@@ -19,17 +19,26 @@
     WHERE COMPANY_SEQ = #{companySeq}
   </select>
   <update id="save" parameterType="kr.co.ooweat.coupon.domain.CouponConfig">
-    UPDATE TB_COUPON_CONFIG
-    SET COMPANY_SEQ = #{companySeq},
-        ISSUANCE_MAX_COUNT    = #{issuanceMaxCount},
-        ISSUANCE_MAX_AMOUNT   = #{issuanceMaxAmount},
-        ISSUANCE_MAX_VALIDITY = #{issuanceMaxValidity},
-        FIXED_USABLE_COUNT    = #{fixedUsableCount},
-        FIXED_ISSUANCE_AMOUNT = #{fixedIssuanceAmount},
-        MERCHANT_NAME         = #{merchantName},
-        SEND_COUNT            = #{sendCount},
-        USE_YN                = #{useYn},
-        MODIFY_DATE           = NOW()
-    WHERE SEQ = #{seq}
+    INSERT INTO TB_COUPON_CONFIG (
+                                  COMPANY_SEQ, ISSUANCE_MAX_COUNT, ISSUANCE_MAX_AMOUNT, ISSUANCE_MAX_VALIDITY,
+                                  FIXED_USABLE_COUNT, FIXED_ISSUANCE_AMOUNT, MERCHANT_NAME, SEND_COUNT, USE_YN, CREATE_DATE)
+    VALUES (#{companySeq}, #{issuanceMaxCount}, #{issuanceMaxAmount}, #{issuanceMaxValidity},
+            #{fixedUsableCount}, #{fixedIssuanceAmount}, #{merchantName}, #{sendCount}, #{useYn}, NOW())
+    ON DUPLICATE KEY
+    UPDATE
+      COMPANY_SEQ = #{companySeq},
+      ISSUANCE_MAX_COUNT = #{issuanceMaxCount},
+      ISSUANCE_MAX_AMOUNT = #{issuanceMaxAmount},
+      ISSUANCE_MAX_VALIDITY = #{issuanceMaxValidity},
+      FIXED_USABLE_COUNT = #{fixedUsableCount},
+      FIXED_ISSUANCE_AMOUNT = #{fixedIssuanceAmount},
+      MERCHANT_NAME = #{merchantName},
+      SEND_COUNT = #{sendCount},
+      USE_YN = #{useYn},
+      MODIFY_DATE = NOW()
   </update>
+  <delete id="delete" parameterType="Long">
+    DELETE FROM TB_COUPON_CONFIG
+    WHERE SEQ = #{seq}
+  </delete>
 </mapper>

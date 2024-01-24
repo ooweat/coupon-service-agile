@@ -5,8 +5,9 @@ import kr.co.ooweat.coupon.application.CouponService;
 import kr.co.ooweat.coupon.application.dto.ConfigRequest;
 import kr.co.ooweat.coupon.application.dto.ConfigResponse;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,10 +28,15 @@ public class ConfigController {
         return ResponseEntity.ok(response);
     }
     
-    @PutMapping
-    public ResponseEntity<Void> updateCouponConfig(@RequestBody @Valid final ConfigRequest configRequest) {
-        System.out.println(configRequest);
-        couponService.updateCouponConfig(configRequest);
+    @PostMapping
+    public ResponseEntity<Void> save(@RequestBody @Valid final ConfigRequest configRequest) {
+        couponService.save(configRequest);
+        return ResponseEntity.ok().build();
+    }
+    
+    @DeleteMapping
+    public ResponseEntity<Void> deleteBySeq(@RequestParam Long seq) {
+        couponService.deleteBySeq(seq);
         return ResponseEntity.noContent().build();
     }
 }

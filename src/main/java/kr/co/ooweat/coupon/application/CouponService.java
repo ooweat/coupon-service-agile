@@ -20,8 +20,13 @@ public class CouponService {
     }
     
     @Transactional
-    public void updateCouponConfig(ConfigRequest configRequest) {
+    public void save(ConfigRequest configRequest) {
         final CouponConfig config = new CouponConfig(configRequest);
         couponMapper.save(config);
+    }
+    
+    @Transactional
+    public void deleteBySeq(Long seq) {
+        couponMapper.deleteBySeq(seq);
     }
 }
