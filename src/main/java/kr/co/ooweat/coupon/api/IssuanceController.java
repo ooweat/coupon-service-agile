@@ -19,9 +19,15 @@ public class IssuanceController {
         this.issuanceService = issuanceService;
     }
     
+    //TODO: Coupon 기본값에 대한 interceptor 처리 진행할 예정
     @PostMapping
     public ResponseEntity<IssuanceResponse> issuance(final IssuanceRequest issuanceRequest) {
-        IssuanceResponse response = issuanceService.save(issuanceRequest);
-        return ResponseEntity.ok(response);
+        try {
+            IssuanceResponse response = issuanceService.save(issuanceRequest);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.badRequest().build();
+        }
     }
 }
