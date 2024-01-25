@@ -1,5 +1,6 @@
 package kr.co.ooweat.coupon.application;
 
+import static kr.co.ooweat.dummey.IssuanceFixture.ISSUANCE_1;
 import static kr.co.ooweat.dummey.MemberFixture.OOWEAT;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.InstanceOfAssertFactories.LOCAL_DATE;
@@ -52,23 +53,29 @@ public class IssuanceServiceTest {
     @DisplayName("쿠폰 발권")
     @Test
     void 쿠폰_발권() {
-        Member member = 로그인();
         // given
-        ConfigResponse configResponse = 쿠폰_설정_조회();
+        //Member member = 로그인();
+        //ConfigResponse configResponse = 쿠폰_설정_조회();
         
+        //쿠폰을 발권한다.
+        // given & when
         //TODO: 일부 데이터에 값을 넣지 않을 경우, config 기본 값에서 처리
-        IssuanceRequest issuanceRequest = new IssuanceRequest(configResponse.getCompanySeq(),
-            member.getSeq(), configResponse.getBinCode(),
-            LocalDate.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyyMMdd")),
-            10000L, 10000L,
-            1, 'N',
-            'K', "010-1234-5678",
-            1);
-        // when
+        IssuanceRequest issuanceRequest = new IssuanceRequest(
+            ISSUANCE_1.getCompanySeq(),
+            ISSUANCE_1.getMemberSeq(),
+            ISSUANCE_1.getBinCode(),
+            ISSUANCE_1.getExpireDate(),
+            ISSUANCE_1.getIssuanceAmount(),
+            ISSUANCE_1.getRemainAmount(),
+            ISSUANCE_1.getRemainCount(),
+            ISSUANCE_1.getStatus(),
+            ISSUANCE_1.getSendType(),
+            ISSUANCE_1.getSendInfo(),
+            ISSUANCE_1.getSendCount()
+        );
+        // then
         IssuanceResponse response = issuanceService.save(issuanceRequest);
         log.info(response.getCouponNo());
-        // then
-        
     }
     
 }
