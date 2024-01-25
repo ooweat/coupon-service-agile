@@ -19,7 +19,6 @@ public class ConfigServiceTest {
     
     @Autowired
     private ConfigService configService;
-    
     @Autowired
     private AuthService authService;
     

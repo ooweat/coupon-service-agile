@@ -3,6 +3,7 @@ package kr.co.ooweat.coupon.domain;
 import java.time.LocalDate;
 import kr.co.ooweat.common.BaseTimeEntity;
 import kr.co.ooweat.coupon.application.dto.ConfigRequest;
+import kr.co.ooweat.coupon.application.dto.IssuanceRequest;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,19 +17,26 @@ public class Issuance extends BaseTimeEntity {
     private String issuanceDate;
     private String expireDate;
     private String couponNo;
-    private String issuanceAmount;
-    private String remainAmount;
-    private String remainCount;
+    private Long issuanceAmount;
+    private Long remainAmount;
+    private int remainCount;
     private char status;
     private char sendType;
     private String sendInfo;
-    private Long sendCount;
+    private int sendCount;
     
-    public Issuance(Long companySeq, Long memberSeq, ConfigRequest configRequest) {
-        this.companySeq = companySeq;
-        this.memberSeq = memberSeq;
-        this.issuanceDate = LocalDate.now().plusDays(
-                Long.parseLong(configRequest.getIssuanceLimitDays()))
-            .format(java.time.format.DateTimeFormatter.ofPattern("yyyyMMdd"));
+    public Issuance(IssuanceRequest issuanceRequest, String couponNo) {
+        this.companySeq = issuanceRequest.getCompanySeq();
+        this.memberSeq = issuanceRequest.getMemberSeq();
+        this.couponNo = couponNo;
+        this.issuanceDate = LocalDate.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyyMMdd"));
+        this.expireDate = issuanceRequest.getExpireDate();
+        this.issuanceAmount = issuanceRequest.getIssuanceAmount();
+        this.remainAmount = issuanceRequest.getRemainAmount();
+        this.remainCount = issuanceRequest.getRemainCount();
+        this.status = issuanceRequest.getStatus();
+        this.sendType = issuanceRequest.getSendType();
+        this.sendInfo = issuanceRequest.getSendInfo();
+        this.sendCount = issuanceRequest.getSendCount();
     }
 }

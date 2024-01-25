@@ -2,5 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.ooweat.coupon.mappers.IssuanceMapper">
-
+  <update id="save" parameterType="kr.co.ooweat.coupon.domain.Issuance">
+    INSERT INTO TB_COUPON_ISSUANCE (COMPANY_SEQ, MEMBER_SEQ, ISSUANCE_DATE, EXPIRE_DATE, COUPON_NO,
+                                    ISSUANCE_AMOUNT, REMAIN_AMOUNT, REMAIN_COUNT, STATUS, SEND_TYPE,
+                                    SEND_INFO, SEND_COUNT)
+    VALUES (#{companySeq}, #{memberSeq}, #{issuanceDate}, #{expireDate}, #{couponNo},
+            #{issuanceAmount}, #{remainAmount}, #{remainCount}, #{status}, #{sendType},
+            #{sendInfo}, #{sendCount}) ON DUPLICATE KEY
+    UPDATE
+      COMPANY_SEQ = #{companySeq},
+      MEMBER_SEQ = #{memberSeq},
+      ISSUANCE_DATE = #{issuanceDate},
+      EXPIRE_DATE = #{expireDate},
+      ISSUANCE_AMOUNT = #{issuanceAmount},
+      REMAIN_AMOUNT = #{remainAmount},
+      REMAIN_COUNT = #{remainCount},
+      STATUS = #{status},
+      SEND_TYPE = #{sendType},
+      SEND_INFO = #{sendInfo},
+      SEND_COUNT = #{sendCount},
+      MODIFY_DATE = NOW()
+  </update>
 </mapper>

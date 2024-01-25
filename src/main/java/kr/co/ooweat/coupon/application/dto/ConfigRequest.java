@@ -45,4 +45,18 @@ public class ConfigRequest extends BaseTimeEntity {
         this.binCode = binCode;
         this.useYn = useYn;
     }
+    
+    /* Test Case*/
+    public ConfigRequest(ConfigResponse configResponse) {
+        this.seq = configResponse.getSeq();
+        this.companySeq = configResponse.getCompanySeq();
+        this.issuanceMaxCount = configResponse.getIssuanceMaxCount();
+        this.issuanceMaxAmount = configResponse.getIssuanceMaxAmount();
+        this.issuanceLimitDays = configResponse.getIssuanceLimitDays();
+        this.fixedUsableCount = configResponse.getFixedUsableCount();
+        this.fixedIssuanceAmount = configResponse.getFixedIssuanceAmount();
+        this.merchantName = configResponse.getMerchantName();
+        this.binCode = configResponse.getBinCode();
+        this.useYn = configResponse.getUseYn();
+    }
 }
