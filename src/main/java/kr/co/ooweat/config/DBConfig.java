@@ -30,7 +30,7 @@ public class DBConfig {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(couponDataSource);
         sqlSessionFactoryBean.setTypeAliasesPackage("kr.co.ooweat.model");
-        sqlSessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath:*/mappers/*.xml"));
+        sqlSessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath:mappers/**/*.xml"));
         return sqlSessionFactoryBean.getObject();
     }
     
