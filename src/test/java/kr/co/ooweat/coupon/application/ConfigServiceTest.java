@@ -13,6 +13,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
 @Slf4j
 @SpringBootTest
 public class ConfigServiceTest {
@@ -28,7 +30,21 @@ public class ConfigServiceTest {
         Member member = authService.login(OOWEAT.createLogin());
         return member;
     }
-    
+
+    @DisplayName("쿠폰 설정 전체 조회")
+    @Test
+    void 쿠폰_설정_전체_조회() {
+        //인증된 멤버가 자신의 설정 정보를 조회한다.
+        // given
+        Member member = 로그인();
+        // when
+        List<ConfigResponse> configResponse = configService.findAllConfigs();
+        log.info(configResponse.toString());
+
+        // then
+        assertThat(member.getUserPhone()).isNotEmpty();
+        assertThat(configResponse).isNotNull();
+    }
     
     @DisplayName("쿠폰 설정 조회")
     @Test

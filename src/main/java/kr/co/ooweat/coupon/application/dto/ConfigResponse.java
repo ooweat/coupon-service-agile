@@ -3,6 +3,9 @@ package kr.co.ooweat.coupon.application.dto;
 import kr.co.ooweat.coupon.domain.CouponConfig;
 import lombok.Getter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 public class ConfigResponse {
     private Long seq;
@@ -19,7 +22,7 @@ public class ConfigResponse {
     private ConfigResponse(){
     
     }
-    
+
     public ConfigResponse(final CouponConfig couponConfig){
         this.seq = couponConfig.getSeq();
         this.companySeq = couponConfig.getCompanySeq();
@@ -32,4 +35,5 @@ public class ConfigResponse {
         this.binCode = couponConfig.getBinCode();
         this.useYn = couponConfig.getUseYn();
     }
+
 }
