@@ -1,23 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.ooweat.auth.mappers.AuthMapper">
-  <select id="findAllByMember" parameterType="string"
-    resultType="kr.co.ooweat.member.domain.Member">
-    SELECT SEQ         AS SEQ,
-           COMPANY_SEQ AS COMPANYSEQ,
-           ORGAN_SEQ   AS ORGANSEQ,
-           AUTH_SEQ    AS AUTHSEQ,
-           ID          AS USERID,
-           PASSWORD    AS USERPASS,
-           NAME        AS USERNAME,
-           PHONE       AS USERPHONE,
-           EMAIL       AS USEREMAIL,
-           USE_YN      AS USEYN,
-           CREATE_DATE AS CREATEDATE,
-           MODIFY_DATE AS MODIFYDATE
-    FROM TB_MEMBER
-    WHERE ID = #{userId}
-      AND PASSWORD = #{userPass}
-  </select>
+    <select id="findByUserId" parameterType="string"
+            resultType="boolean">
+        SELECT IF(COUNT(*) = 1, 1, 0)
+        FROM TB_MEMBER
+        WHERE ID = #{userId}
+    </select>
+    <select id="findByCompanySeq" parameterType="Long"
+            resultType="kr.co.ooweat.auth.domain.Auth">
+        SELECT SEQ         AS SEQ,
+               ROLES AS ROLES
+        FROM TB_AUTH
+        WHERE COMPANY_SEQ = #{companySeq}
+    </select>
+    <update id="save" parameterType="kr.co.ooweat.member.domain.Member">
+        INSERT INTO TB_MEMBER
+        (COMPANY_SEQ,
+         ORGAN_SEQ,
+         AUTH_SEQ,
+         ID,
+         PASSWORD,
+         NAME,
+         PHONE,
+         EMAIL)
+        VALUES (#{companySeq},
+                #{organSeq},
+                #{authSeq},
+                #{userId},
+                #{userPass},
+                #{userName},
+                #{userPhone},
+                #{userEmail})
+    </update>
+    <select id="findAllByMember" parameterType="string"
+            resultType="kr.co.ooweat.member.domain.Member">
+        SELECT SEQ         AS SEQ,
+               COMPANY_SEQ AS COMPANYSEQ,
+               ORGAN_SEQ   AS ORGANSEQ,
+               AUTH_SEQ    AS AUTHSEQ,
+               ID          AS USERID,
+               PASSWORD    AS USERPASS,
+               NAME        AS USERNAME,
+               PHONE       AS USERPHONE,
+               EMAIL       AS USEREMAIL,
+               USE_YN      AS USEYN,
+               CREATE_DATE AS CREATEDATE,
+               MODIFY_DATE AS MODIFYDATE
+        FROM TB_MEMBER
+        WHERE ID = #{userId}
+          AND PASSWORD = #{userPass}
+    </select>
 </mapper>

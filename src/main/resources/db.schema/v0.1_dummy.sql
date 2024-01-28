@@ -4,7 +4,7 @@ INSERT INTO TB_COUPON_CONFIG (SEQ, COMPANY_SEQ, ISSUANCE_MAX_COUNT, ISSUANCE_MAX
 VALUES (1, 1, 100, 10000, 90, 1, 10000, 'ooweat', '525252', 'Y', NOW());
 
 INSERT INTO TB_MEMBER (COMPANY_SEQ, ORGAN_SEQ, AUTH_SEQ, ID, PASSWORD, NAME, PHONE, EMAIL)
-VALUES (1, 0, 0, 'ooweat', 'ooweat!@#$', 'ooweat', '010-0000-0000', 'ooweat@kakao.com');
+VALUES (1, 0, 0, 'ooweat', MD5('ooweat!@#$'), 'ooweat', '010-0000-0000', 'ooweat@kakao.com');
 
 INSERT INTO TB_COUPON_ISSUANCE (COMPANY_SEQ, MEMBER_SEQ, ISSUANCE_DATE, EXPIRE_DATE, COUPON_NO,
                                 ISSUANCE_AMOUNT, REMAIN_AMOUNT, REMAIN_COUNT, STATUS, SEND_TYPE,
@@ -12,3 +12,33 @@ INSERT INTO TB_COUPON_ISSUANCE (COMPANY_SEQ, MEMBER_SEQ, ISSUANCE_DATE, EXPIRE_D
 VALUES (1, 1, CURRENT_DATE(), '20241231', '1234567890123456',
         10000, 10000, 1, 'N', 'K',
         '010-1234-5678', 1);
+
+insert into TB_COMPANY (NAME)
+values ('코레일유통');
+
+SELECT * FROM TB_ORGANIZATION;
+-- 조직 Depth 의  타이틀을 위함
+insert into TB_ORGANIZATION (COMPANY_SEQ, PARENT_SEQ, DEPTH, SORT, NAME)
+values (1 , 0, 0, 0, '본부');
+
+insert into TB_ORGANIZATION (COMPANY_SEQ, PARENT_SEQ, DEPTH, SORT, NAME)
+values (1 , 0, 0, 1, '서울본부');
+insert into TB_ORGANIZATION (COMPANY_SEQ, PARENT_SEQ, DEPTH, SORT, NAME)
+values (1 , 0, 0, 1, '경기본부');
+insert into TB_ORGANIZATION (COMPANY_SEQ, PARENT_SEQ, DEPTH, SORT, NAME)
+values (1 , 0, 0, 1, '인천본부');
+
+insert into TB_ORGANIZATION (COMPANY_SEQ, PARENT_SEQ, DEPTH, SORT, NAME)
+values (1 , 1, 1, 0, '역사');
+insert into TB_ORGANIZATION (COMPANY_SEQ, PARENT_SEQ, DEPTH, SORT, NAME)
+values (1 , 1, 1, 1, '서울역');
+insert into TB_ORGANIZATION (COMPANY_SEQ, PARENT_SEQ, DEPTH, SORT, NAME)
+values (1 , 1, 1, 1, '용산역');
+insert into TB_ORGANIZATION (COMPANY_SEQ, PARENT_SEQ, DEPTH, SORT, NAME)
+values (1 , 1, 1, 1, '구로역');
+
+
+
+
+
+
