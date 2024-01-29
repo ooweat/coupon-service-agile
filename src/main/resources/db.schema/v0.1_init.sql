@@ -50,7 +50,7 @@ CREATE TABLE TB_COUPON_CONFIG
     FIXED_USABLE_COUNT    TINYINT     NOT NULL DEFAULT 1 COMMENT '기본값 쿠폰 사용 가능 횟수',
     FIXED_ISSUANCE_AMOUNT MEDIUMINT   NULL COMMENT '기본값 발권 금액',
     MERCHANT_NAME         VARCHAR(50) NULL COMMENT '쿠폰에 표기될 사용처 명칭',
-    BIN_CODE              VARCHAR(6)           DEFAULT '525252' NOT NULL COMMENT '쿠폰 BIN CODE',
+    BIN_CODE              VARCHAR(6)            COMMENT '쿠폰 BIN CODE',
     USE_YN                CHAR        NOT NULL DEFAULT 'Y' COMMENT '사용여부',
     CREATE_DATE           DATETIME             DEFAULT CURRENT_TIMESTAMP() NOT NULL COMMENT '생성일자',
     MODIFY_DATE           DATETIME    NULL COMMENT '수정일자'
@@ -88,7 +88,7 @@ CREATE TABLE TB_COUPON_ISSUANCE
     MEMBER_SEQ      MEDIUMINT                             NOT NULL COMMENT 'TB_MEMBER 의 SEQ',
     ISSUANCE_DATE   VARCHAR(8)                            NOT NULL COMMENT '발권일자: YYYYMMDD',
     EXPIRE_DATE     VARCHAR(8)                            NOT NULL COMMENT '만료일자: YYYYMMDD',
-    COUPON_NO       VARCHAR(100)                          NOT NULL COMMENT '쿠폰번호: 난수 포함 20자리',
+    COUPON_NO       VARCHAR(20)                          NOT NULL COMMENT '쿠폰번호: 난수 포함 16자리',
     ISSUANCE_AMOUNT MEDIUMINT DEFAULT 0                   NOT NULL COMMENT '발권금액',
     REMAIN_AMOUNT   MEDIUMINT DEFAULT 0                   NOT NULL COMMENT '잔여금액',
     REMAIN_COUNT    SMALLINT  DEFAULT 0                   NOT NULL COMMENT '잔여사용가능횟수',

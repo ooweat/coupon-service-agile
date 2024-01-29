@@ -2,7 +2,6 @@ package kr.co.ooweat.coupon.domain;
 
 import java.time.LocalDate;
 import kr.co.ooweat.common.BaseTimeEntity;
-import kr.co.ooweat.coupon.application.dto.ConfigRequest;
 import kr.co.ooweat.coupon.application.dto.IssuanceRequest;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -25,7 +24,11 @@ public class Issuance extends BaseTimeEntity {
     private char sendType;
     private String sendInfo;
     private int sendCount;
+    private String companyName;
+    private String organName;
+    private String memberName;
     
+    //DESC: save
     public Issuance(IssuanceRequest issuanceRequest, String couponNo) {
         this.companySeq = issuanceRequest.getCompanySeq();
         this.organSeq = issuanceRequest.getOrganSeq();

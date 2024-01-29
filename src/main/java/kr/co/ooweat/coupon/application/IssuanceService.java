@@ -1,10 +1,16 @@
 package kr.co.ooweat.coupon.application;
 
-import kr.co.ooweat.coupon.application.dto.ConfigRequest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import kr.co.ooweat.coupon.application.dto.IssuanceRequest;
 import kr.co.ooweat.coupon.application.dto.IssuanceResponse;
 import kr.co.ooweat.coupon.domain.Issuance;
 import kr.co.ooweat.coupon.mappers.IssuanceMapper;
+import kr.co.ooweat.utils.Util;
+import org.springframework.boot.context.properties.bind.Name;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,7 +22,7 @@ public class IssuanceService {
         this.issuanceMapper = issuanceMapper;
     }
     
-    public IssuanceResponse save(IssuanceRequest issuanceRequest) {
+    public IssuanceResponse save(IssuanceRequest issuanceRequest) throws NoSuchAlgorithmException {
         final Issuance issuance = new Issuance(issuanceRequest,
             generateCouponNo(issuanceRequest.getBinCode()));
         issuanceMapper.save(issuance);
@@ -25,9 +31,29 @@ public class IssuanceService {
         //couponMapper.save(issuance);
     }
     
-    //TODO: 당장은 couponNO 를 상수로 선언(암호화 예정)
+    public List<IssuanceResponse> findAllByCompanyWithOrganSeq(IssuanceRequest issuanceRequest) {
+        List<Issuance> findAllByCompanyWithOrganSeq = issuanceMapper.findAllByCompanyWithOrgan(issuanceRequest);
+        List<IssuanceResponse> issuanceResponse = new ArrayList<>();
+        
+        for (Issuance v : findAllByCompanyWithOrganSeq) {
+            issuanceResponse.add(new IssuanceResponse(v));
+        }
+        return issuanceResponse;
+    }
+    
+    /*
+    * @param binCode
+    * @DESC: 쿠폰 번호 생성
+    *    binCode + coupontype + YYMMddHHmmss + 1-9 random
+    * */
     private String generateCouponNo(String binCode) {
-        binCode = binCode+"1234567890";
+        String couponNo = "";
+        binCode += Util.dateUtils().now("YYMMddHHmmss");
+        couponNo+=binCode;
+        
+        
+        
+        issuanceMapper.findByCouponNo(binCode);
         return binCode;
     }
 }

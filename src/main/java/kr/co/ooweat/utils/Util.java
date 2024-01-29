@@ -1,5 +1,6 @@
 package kr.co.ooweat.utils;
 
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -7,6 +8,8 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 
 //TODO: 일단 통합으로 구현..
@@ -21,11 +24,14 @@ public class Util {
     public static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyyMM");
 
     public static class DateUtils {
-
-        public String now() {
-            return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+    
+        public String now(String format) {
+            if(format.isEmpty()){
+                return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
+            } else {
+                return LocalDateTime.now().format(DateTimeFormatter.ofPattern(format));
+            }
         }
-
         public String yyyyMM() {
             return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMM"));
         }
@@ -172,5 +178,17 @@ public class Util {
             }
             return true;
         }
+    }
+    
+    public static Boolean empty(Object obj) {
+        if (obj instanceof String) return obj == null || "".equals(obj.toString().trim());
+        else if (obj instanceof List) return obj == null || ((List) obj).isEmpty();
+        else if (obj instanceof Map) return obj == null || ((Map) obj).isEmpty();
+        else if (obj instanceof Object[]) return obj == null || Array.getLength(obj) == 0;
+        else return obj == null;
+    }
+    
+    public static Boolean notEmpty(Object obj) {
+        return !empty(obj);
     }
 }

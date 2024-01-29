@@ -15,6 +15,9 @@ public class IssuanceResponse {
     private char sendType;
     private String sendInfo;
     private int sendCount;
+    private String companyName;
+    private String organName;
+    private String memberName;
     
     public IssuanceResponse(Issuance issuance) {
         this.issuanceDate = issuance.getIssuanceDate();
@@ -27,5 +30,9 @@ public class IssuanceResponse {
         this.sendType = issuance.getSendType();
         this.sendInfo = issuance.getSendInfo();
         this.sendCount = issuance.getSendCount();
+        this.companyName = issuance.getCompanyName();
+        this.organName = issuance.getOrganName();
+        this.memberName = issuance.getMemberName();
     }
+    
 }
