@@ -8,6 +8,7 @@ import lombok.Getter;
 public class ConfigRequest extends BaseTimeEntity {
     private Long seq;
     private Long companySeq;
+    private Long organSeq;
     private String issuanceMaxCount;
     private String issuanceMaxAmount;
     private String issuanceLimitDays;
@@ -30,12 +31,13 @@ public class ConfigRequest extends BaseTimeEntity {
         this.useYn = couponConfig.getUseYn();
     }
     
-    public ConfigRequest(final Long seq, final Long companySeq, final String issuanceMaxCount,
-        final String issuanceMaxAmount, final String issuanceLimitDays,
+    public ConfigRequest(final Long seq, final Long companySeq, final Long organSeq,
+        final String issuanceMaxCount, final String issuanceMaxAmount, final String issuanceLimitDays,
         final String fixedUsableCount, final String fixedIssuanceAmount, final String merchantName,
         final String binCode, final char useYn) {
         this.seq = seq;
         this.companySeq = companySeq;
+        this.organSeq = organSeq;
         this.issuanceMaxCount = issuanceMaxCount;
         this.issuanceMaxAmount = issuanceMaxAmount;
         this.issuanceLimitDays = issuanceLimitDays;
@@ -50,6 +52,7 @@ public class ConfigRequest extends BaseTimeEntity {
     public ConfigRequest(ConfigResponse configResponse) {
         this.seq = configResponse.getSeq();
         this.companySeq = configResponse.getCompanySeq();
+        this.organSeq = configResponse.getOrganSeq();
         this.issuanceMaxCount = configResponse.getIssuanceMaxCount();
         this.issuanceMaxAmount = configResponse.getIssuanceMaxAmount();
         this.issuanceLimitDays = configResponse.getIssuanceLimitDays();

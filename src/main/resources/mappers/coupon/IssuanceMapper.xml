@@ -3,14 +3,15 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.ooweat.coupon.mappers.IssuanceMapper">
   <update id="save" parameterType="kr.co.ooweat.coupon.domain.Issuance">
-    INSERT INTO TB_COUPON_ISSUANCE (COMPANY_SEQ, MEMBER_SEQ, ISSUANCE_DATE, EXPIRE_DATE, COUPON_NO,
+    INSERT INTO TB_COUPON_ISSUANCE (COMPANY_SEQ, ORGAN_SEQ, MEMBER_SEQ, ISSUANCE_DATE, EXPIRE_DATE, COUPON_NO,
                                     ISSUANCE_AMOUNT, REMAIN_AMOUNT, REMAIN_COUNT, STATUS, SEND_TYPE,
                                     SEND_INFO, SEND_COUNT)
-    VALUES (#{companySeq}, #{memberSeq}, #{issuanceDate}, #{expireDate}, #{couponNo},
+    VALUES (#{companySeq}, #{organSeq}, #{memberSeq}, #{issuanceDate}, #{expireDate}, #{couponNo},
             #{issuanceAmount}, #{remainAmount}, #{remainCount}, #{status}, #{sendType},
             #{sendInfo}, #{sendCount}) ON DUPLICATE KEY
     UPDATE
       COMPANY_SEQ = #{companySeq},
+      ORGAN_SEQ = #{organSeq},
       MEMBER_SEQ = #{memberSeq},
       ISSUANCE_DATE = #{issuanceDate},
       EXPIRE_DATE = #{expireDate},

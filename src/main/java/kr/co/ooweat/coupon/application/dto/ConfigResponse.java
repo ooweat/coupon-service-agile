@@ -10,6 +10,7 @@ import java.util.List;
 public class ConfigResponse {
     private Long seq;
     private Long companySeq;
+    private Long organSeq;
     private String issuanceMaxCount;
     private String issuanceMaxAmount;
     private String issuanceLimitDays;
@@ -26,6 +27,7 @@ public class ConfigResponse {
     public ConfigResponse(final CouponConfig couponConfig){
         this.seq = couponConfig.getSeq();
         this.companySeq = couponConfig.getCompanySeq();
+        this.organSeq = couponConfig.getOrganSeq();
         this.issuanceMaxCount = couponConfig.getIssuanceMaxCount();
         this.issuanceMaxAmount = couponConfig.getIssuanceMaxAmount();
         this.issuanceLimitDays = couponConfig.getIssuanceLimitDays();

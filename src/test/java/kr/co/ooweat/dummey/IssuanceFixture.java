@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 public enum IssuanceFixture {
-    ISSUANCE_1(1L,
+    ISSUANCE_1(1L, 1L,
         1L, "525252",
         LocalDate.now().plusDays(90).format(java.time.format.DateTimeFormatter.ofPattern("yyyyMMdd")),
         10000L, 10000L,
@@ -15,6 +15,7 @@ public enum IssuanceFixture {
     ;
     
     private final long companySeq;
+    private final Long organSeq;
     private final long memberSeq;
     private final String binCode;
     private final String expireDate;
@@ -27,10 +28,11 @@ public enum IssuanceFixture {
     private final int sendCount;
     
     
-    IssuanceFixture(long companySeq, long memberSeq, String binCode, String expireDate,
+    IssuanceFixture(long companySeq, long organSeq, long memberSeq, String binCode, String expireDate,
         long issuanceAmount, long remainAmount, int remainCount, char status, char sendType,
         String sendInfo, int sendCount) {
         this.companySeq = companySeq;
+        this.organSeq = organSeq;
         this.memberSeq = memberSeq;
         this.binCode = binCode;
         this.expireDate = expireDate;

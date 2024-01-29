@@ -7,6 +7,7 @@ import lombok.Getter;
 @Getter
 public class IssuanceRequest extends BaseTimeEntity {
     private Long companySeq;
+    private Long organSeq;
     private Long memberSeq;
     private String binCode;
     private Long issuanceAmount;
@@ -18,10 +19,11 @@ public class IssuanceRequest extends BaseTimeEntity {
     private String sendInfo;
     private int sendCount;
     
-    public IssuanceRequest(Long companySeq, Long memberSeq, String binCode, String expireDate,
+    public IssuanceRequest(Long companySeq, Long organSeq, Long memberSeq, String binCode, String expireDate,
         Long issuanceAmount, Long remainAmount, int remainCount, char status, char sendType,
         String sendInfo, int sendCount) {
         this.companySeq = companySeq;
+        this.organSeq = organSeq;
         this.memberSeq = memberSeq;
         this.binCode = binCode;
         this.issuanceAmount = issuanceAmount;

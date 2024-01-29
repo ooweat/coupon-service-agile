@@ -62,6 +62,7 @@ public class IssuanceServiceTest {
         //TODO: 일부 데이터에 값을 넣지 않을 경우, config 기본 값에서 처리
         IssuanceRequest issuanceRequest = new IssuanceRequest(
             ISSUANCE_1.getCompanySeq(),
+            ISSUANCE_1.getOrganSeq(),
             ISSUANCE_1.getMemberSeq(),
             ISSUANCE_1.getBinCode(),
             ISSUANCE_1.getExpireDate(),

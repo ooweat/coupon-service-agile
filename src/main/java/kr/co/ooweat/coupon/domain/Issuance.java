@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 public class Issuance extends BaseTimeEntity {
     private Long seq;
     private Long companySeq;
+    private Long organSeq;
     private Long memberSeq;
     private String issuanceDate;
     private String expireDate;
@@ -27,6 +28,7 @@ public class Issuance extends BaseTimeEntity {
     
     public Issuance(IssuanceRequest issuanceRequest, String couponNo) {
         this.companySeq = issuanceRequest.getCompanySeq();
+        this.organSeq = issuanceRequest.getOrganSeq();
         this.memberSeq = issuanceRequest.getMemberSeq();
         this.couponNo = couponNo;
         this.issuanceDate = LocalDate.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyyMMdd"));
