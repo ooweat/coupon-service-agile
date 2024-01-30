@@ -2,6 +2,7 @@ package kr.co.ooweat.coupon.mappers;
 
 import java.util.List;
 import kr.co.ooweat.coupon.application.dto.IssuanceRequest;
+import kr.co.ooweat.coupon.application.dto.StatusResponse;
 import kr.co.ooweat.coupon.domain.Issuance;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -10,4 +11,7 @@ public interface IssuanceMapper {
     boolean findByCouponNo(String couponNo);
     void save(Issuance couponConfig);
     List<Issuance> findAllByCompanyWithOrgan(IssuanceRequest issuanceRequest);
+    boolean issuance(Issuance issuance);
+    boolean addSendCountByCouponNo(String couponNo);
+    Issuance updateStatusByCouponNo(IssuanceRequest issuanceRequest);
 }

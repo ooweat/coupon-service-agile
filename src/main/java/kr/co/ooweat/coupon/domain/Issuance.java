@@ -17,6 +17,7 @@ public class Issuance extends BaseTimeEntity {
     private String issuanceDate;
     private String expireDate;
     private String couponNo;
+    private String couponType;
     private Long issuanceAmount;
     private Long remainAmount;
     private int remainCount;
@@ -34,6 +35,7 @@ public class Issuance extends BaseTimeEntity {
         this.organSeq = issuanceRequest.getOrganSeq();
         this.memberSeq = issuanceRequest.getMemberSeq();
         this.couponNo = couponNo;
+        this.couponType = issuanceRequest.getCouponType();
         this.issuanceDate = LocalDate.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyyMMdd"));
         this.expireDate = issuanceRequest.getExpireDate();
         this.issuanceAmount = issuanceRequest.getIssuanceAmount();
@@ -43,5 +45,9 @@ public class Issuance extends BaseTimeEntity {
         this.sendType = issuanceRequest.getSendType();
         this.sendInfo = issuanceRequest.getSendInfo();
         this.sendCount = issuanceRequest.getSendCount();
+    }
+    
+    public Issuance(IssuanceRequest issuanceRequest) {
+    
     }
 }

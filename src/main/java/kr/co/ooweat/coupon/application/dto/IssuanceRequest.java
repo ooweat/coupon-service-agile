@@ -9,6 +9,7 @@ public class IssuanceRequest extends BaseTimeEntity {
     private Long organSeq;
     private Long memberSeq;
     private String binCode;
+    private String couponType;
     private Long issuanceAmount;
     private Long remainAmount;
     private int remainCount;
@@ -28,13 +29,14 @@ public class IssuanceRequest extends BaseTimeEntity {
     }
     
     
-    public IssuanceRequest(Long companySeq, Long organSeq, Long memberSeq, String binCode, String expireDate,
+    public IssuanceRequest(Long companySeq, Long organSeq, Long memberSeq, String binCode, String couponType, String expireDate,
         Long issuanceAmount, Long remainAmount, int remainCount, char status, char sendType,
         String sendInfo, int sendCount) {
         this.companySeq = companySeq;
         this.organSeq = organSeq;
         this.memberSeq = memberSeq;
         this.binCode = binCode;
+        this.couponType = couponType;
         this.issuanceAmount = issuanceAmount;
         this.remainAmount = remainAmount;
         this.remainCount = remainCount;
@@ -43,5 +45,10 @@ public class IssuanceRequest extends BaseTimeEntity {
         this.sendType = sendType;
         this.sendInfo = sendInfo;
         this.sendCount = sendCount;
+    }
+    
+    public IssuanceRequest(char status, String couponNo) {
+        this.status = status;
+        this.binCode = couponNo;
     }
 }

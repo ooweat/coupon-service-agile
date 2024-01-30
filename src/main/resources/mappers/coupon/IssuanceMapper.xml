@@ -36,6 +36,7 @@
     A.ISSUANCE_DATE AS ISSUANCEDATE,
     A.EXPIRE_DATE AS EXPIREDATE,
     A.COUPON_NO AS COUPONNO,
+    A.COUPON_TYPE AS COUPONTYPE,
     A.ISSUANCE_AMOUNT AS ISSUANCEAMOUNT,
     A.REMAIN_AMOUNT AS REMAINAMOUNT,
     A.REMAIN_COUNT AS REMAINCOUNT,
@@ -68,11 +69,11 @@
   </select>
   <update id="save" parameterType="kr.co.ooweat.coupon.domain.Issuance">
     INSERT INTO TB_COUPON_ISSUANCE (COMPANY_SEQ, ORGAN_SEQ, MEMBER_SEQ, ISSUANCE_DATE, EXPIRE_DATE,
-                                    COUPON_NO,
+                                    COUPON_NO, COUPON_TYPE,
                                     ISSUANCE_AMOUNT, REMAIN_AMOUNT, REMAIN_COUNT, STATUS, SEND_TYPE,
                                     SEND_INFO, SEND_COUNT)
     VALUES (#{companySeq}, #{organSeq}, #{memberSeq}, #{issuanceDate}, #{expireDate}, #{couponNo},
-            #{issuanceAmount}, #{remainAmount}, #{remainCount}, #{status}, #{sendType},
+            #{couponType}, #{issuanceAmount}, #{remainAmount}, #{remainCount}, #{status}, #{sendType},
             #{sendInfo}, #{sendCount}) ON DUPLICATE KEY
     UPDATE
       COMPANY_SEQ = #{companySeq},
@@ -80,6 +81,7 @@
       MEMBER_SEQ = #{memberSeq},
       ISSUANCE_DATE = #{issuanceDate},
       EXPIRE_DATE = #{expireDate},
+      COUPON_TYPE = #{couponType},
       ISSUANCE_AMOUNT = #{issuanceAmount},
       REMAIN_AMOUNT = #{remainAmount},
       REMAIN_COUNT = #{remainCount},
@@ -88,5 +90,17 @@
       SEND_INFO = #{sendInfo},
       SEND_COUNT = #{sendCount},
       MODIFY_DATE = NOW()
+  </update>
+  <update id="updateStatusByCouponNo" parameterType="kr.co.ooweat.coupon.domain.Issuance">
+    UPDATE TB_COUPON_ISSUANCE
+    SET STATUS = #{status},
+        MODIFY_DATE = NOW()
+    WHERE COUPON_NO = #{couponNo}
+  </update>
+  <update id="addSendCountByCouponNo" parameterType="String">
+    UPDATE TB_COUPON_ISSUANCE
+    SET SEND_COUNT = SEND_COUNT + 1,
+        MODIFY_DATE = NOW()
+    WHERE COUPON_NO = #{couponNo}
   </update>
 </mapper>
