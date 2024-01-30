@@ -17,6 +17,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 public class AuthServiceTest {
+    
     @Autowired
     private AuthService authService;
     
@@ -31,5 +32,24 @@ public class AuthServiceTest {
         
         // then
         //assertThat(response.getToken()).isNotEmpty();
+    }
+    
+    
+    @Test
+    void test() {
+        String my_string = "banana";
+        String is_suffix = "ana";
+        //int answer = 0;
+        
+        int[] num_list = {2, 1, 6};
+        int start_num = 3;
+        int end_num = 10;
+        int[] answer = {};
+        for(int i = start_num; i <= end_num; i++){
+            answer[i]+=i;
+            System.out.printf("answer:" + answer);
+        }
+        
+        
     }
 }

@@ -62,4 +62,9 @@
     FROM TB_COUPON_CONFIG
     WHERE SEQ = #{seq}
   </delete>
+  <update id="consumeCoin" parameterType="Long">
+    UPDATE TB_COUPON_CONFIG
+    SET ISSUANCE_MAX_COUNT = ISSUANCE_MAX_COUNT -1
+    WHERE COMPANY_SEQ = #{companySeq}
+  </update>
 </mapper>

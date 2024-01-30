@@ -18,6 +18,7 @@ public class IssuanceResponse {
     private String companyName;
     private String organName;
     private String memberName;
+    private boolean isSuccess;
     
     public IssuanceResponse(Issuance issuance) {
         this.issuanceDate = issuance.getIssuanceDate();
@@ -33,6 +34,11 @@ public class IssuanceResponse {
         this.companyName = issuance.getCompanyName();
         this.organName = issuance.getOrganName();
         this.memberName = issuance.getMemberName();
+    }
+    
+    public IssuanceResponse(boolean b, String couponNo) {
+        this.isSuccess = b;
+        this.couponNo = couponNo;
     }
     
 }
