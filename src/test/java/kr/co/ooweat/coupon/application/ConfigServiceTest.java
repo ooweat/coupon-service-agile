@@ -53,8 +53,7 @@ public class ConfigServiceTest {
         // given
         Member member = 로그인();
         // when
-        ConfigResponse configResponse = configService.findConfigByCompanySeq(
-            member.getCompanySeq());
+        ConfigResponse configResponse = configService.findConfigByOrganSeq(member.getOrganSeq());
         // then
         assertThat(member.getUserPhone()).isNotEmpty();
         assertThat(configResponse).isNotNull();
@@ -67,7 +66,7 @@ public class ConfigServiceTest {
         // given & when
         Member member = 로그인();
         configService.save(COMPANY_1.createCouponConfig());
-        ConfigResponse response = configService.findConfigByCompanySeq(member.getCompanySeq());
+        ConfigResponse response = configService.findConfigByOrganSeq(member.getCompanySeq());
         //then
         assertThat(response.getBinCode()).isEqualTo(COMPANY_1.getBinCode());
     }
@@ -78,13 +77,13 @@ public class ConfigServiceTest {
         //인증된 멤버가 자신의 설정 정보를 조회 후, 업데이트 한다.
         // given
         Member member = 로그인();
-        ConfigResponse configResponse = configService.findConfigByCompanySeq(
+        ConfigResponse configResponse = configService.findConfigByOrganSeq(
             member.getCompanySeq());
         assertThat(configResponse).isNotNull();
         
         // when
         configService.save(COMPANY_1.createCouponConfig());
-        ConfigResponse response = configService.findConfigByCompanySeq(member.getCompanySeq());
+        ConfigResponse response = configService.findConfigByOrganSeq(member.getCompanySeq());
         // then
         assertThat(response.getBinCode()).isEqualTo(COMPANY_1.getBinCode());
     }

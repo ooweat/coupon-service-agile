@@ -11,8 +11,8 @@ public class ConfigResponse {
     private Long seq;
     private Long companySeq;
     private Long organSeq;
-    private String issuanceMaxCount;
-    private String issuanceMaxAmount;
+    private char paymentType;
+    private String remainPoint;
     private String issuanceLimitDays;
     private String fixedUsableCount;
     private String fixedIssuanceAmount;
@@ -28,8 +28,8 @@ public class ConfigResponse {
         this.seq = couponConfig.getSeq();
         this.companySeq = couponConfig.getCompanySeq();
         this.organSeq = couponConfig.getOrganSeq();
-        this.issuanceMaxCount = couponConfig.getIssuanceMaxCount();
-        this.issuanceMaxAmount = couponConfig.getIssuanceMaxAmount();
+        this.paymentType = couponConfig.getPaymentType();
+        this.remainPoint = couponConfig.getRemainPoint();
         this.issuanceLimitDays = couponConfig.getIssuanceLimitDays();
         this.fixedUsableCount = couponConfig.getFixedUsableCount();
         this.fixedIssuanceAmount = couponConfig.getFixedIssuanceAmount();

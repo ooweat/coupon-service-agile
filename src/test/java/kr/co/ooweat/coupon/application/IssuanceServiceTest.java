@@ -5,10 +5,7 @@ import static kr.co.ooweat.dummey.MemberFixture.OOWEAT;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 import java.util.List;
-import java.util.Random;
-import java.util.stream.IntStream;
 import kr.co.ooweat.auth.application.AuthService;
 import kr.co.ooweat.coupon.application.dto.ConfigResponse;
 import kr.co.ooweat.coupon.application.dto.IssuanceRequest;
@@ -47,7 +44,7 @@ public class IssuanceServiceTest {
         // given
         Member member = 로그인();
         // when
-        ConfigResponse configResponse = configService.findConfigByCompanySeq(
+        ConfigResponse configResponse = configService.findConfigByOrganSeq(
             member.getCompanySeq());
         
         return configResponse;
@@ -94,7 +91,7 @@ public class IssuanceServiceTest {
             ISSUANCE_1.getSendCount()
         );*/
         // then
-        IssuanceResponse response = issuanceService.save(issuanceRequest);
+        IssuanceResponse response = issuanceService.issuance(issuanceRequest);
         log.info(response.getCouponNo());
     }
     

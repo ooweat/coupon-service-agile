@@ -4,8 +4,11 @@ import kr.co.ooweat.member.domain.Member;
 import lombok.Getter;
 
 public enum MemberFixture {
-
+    
     OOWEAT("ooweat", "ooweat!@#$", ""),
+    KORAIL_1("korail", "korail!@#$", ""),
+    KORAIL_2("korailseoul", "korail!@#$", ""),
+    KORAIL_3("korailguro", "korail!@#$", ""),
     ;
     @Getter
     private final String userId;

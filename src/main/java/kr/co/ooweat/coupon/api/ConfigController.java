@@ -32,7 +32,7 @@ public class ConfigController {
 
     @GetMapping("/companys/{company_seq}")
     public ResponseEntity<ConfigResponse> find(@PathVariable Long companySeq) {
-        ConfigResponse response = configService.findConfigByCompanySeq(companySeq);
+        ConfigResponse response = configService.findConfigByOrganSeq(companySeq);
         return ResponseEntity.ok(response);
     }
 

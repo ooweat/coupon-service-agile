@@ -51,4 +51,9 @@ public class IssuanceRequest extends BaseTimeEntity {
         this.status = status;
         this.binCode = couponNo;
     }
+    
+    public IssuanceRequest(Long companySeq, Long organSeq, Long seq, String binCode, String expireDate, long issuanceAmount, long remainAmount, int remainCount,
+        char status, char sendType, String sendInfo, int sendCount) {
+        super();
+    }
 }

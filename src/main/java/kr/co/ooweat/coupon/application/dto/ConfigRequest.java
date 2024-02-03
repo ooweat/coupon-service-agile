@@ -9,8 +9,8 @@ public class ConfigRequest extends BaseTimeEntity {
     private Long seq;
     private Long companySeq;
     private Long organSeq;
-    private String issuanceMaxCount;
-    private String issuanceMaxAmount;
+    private char paymentType;
+    private String remainPoint;
     private String issuanceLimitDays;
     private String fixedUsableCount;
     private String fixedIssuanceAmount;
@@ -21,8 +21,8 @@ public class ConfigRequest extends BaseTimeEntity {
     public ConfigRequest(final CouponConfig couponConfig){
         this.seq = couponConfig.getSeq();
         this.companySeq = couponConfig.getCompanySeq();
-        this.issuanceMaxCount = couponConfig.getIssuanceMaxCount();
-        this.issuanceMaxAmount = couponConfig.getIssuanceMaxAmount();
+        this.paymentType = couponConfig.getPaymentType();
+        this.remainPoint = couponConfig.getRemainPoint();
         this.issuanceLimitDays = couponConfig.getIssuanceLimitDays();
         this.fixedUsableCount = couponConfig.getFixedUsableCount();
         this.fixedIssuanceAmount = couponConfig.getFixedIssuanceAmount();
@@ -32,14 +32,14 @@ public class ConfigRequest extends BaseTimeEntity {
     }
     
     public ConfigRequest(final Long seq, final Long companySeq, final Long organSeq,
-        final String issuanceMaxCount, final String issuanceMaxAmount, final String issuanceLimitDays,
+        final char paymentType, final String remainPoint, final String issuanceLimitDays,
         final String fixedUsableCount, final String fixedIssuanceAmount, final String merchantName,
         final String binCode, final char useYn) {
         this.seq = seq;
         this.companySeq = companySeq;
         this.organSeq = organSeq;
-        this.issuanceMaxCount = issuanceMaxCount;
-        this.issuanceMaxAmount = issuanceMaxAmount;
+        this.paymentType = paymentType;
+        this.remainPoint = remainPoint;
         this.issuanceLimitDays = issuanceLimitDays;
         this.fixedUsableCount = fixedUsableCount;
         this.fixedIssuanceAmount = fixedIssuanceAmount;
@@ -53,8 +53,8 @@ public class ConfigRequest extends BaseTimeEntity {
         this.seq = configResponse.getSeq();
         this.companySeq = configResponse.getCompanySeq();
         this.organSeq = configResponse.getOrganSeq();
-        this.issuanceMaxCount = configResponse.getIssuanceMaxCount();
-        this.issuanceMaxAmount = configResponse.getIssuanceMaxAmount();
+        this.paymentType = configResponse.getPaymentType();
+        this.remainPoint = configResponse.getRemainPoint();
         this.issuanceLimitDays = configResponse.getIssuanceLimitDays();
         this.fixedUsableCount = configResponse.getFixedUsableCount();
         this.fixedIssuanceAmount = configResponse.getFixedIssuanceAmount();

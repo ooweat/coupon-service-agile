@@ -6,8 +6,8 @@
     SELECT SEQ,
            COMPANY_SEQ           AS COMPANYSEQ,
            ORGAN_SEQ             AS ORGANSEQ,
-           ISSUANCE_MAX_COUNT    AS ISSUANCEMAXCOUNT,
-           ISSUANCE_MAX_AMOUNT   AS ISSUANCEMAXAMOUNT,
+           PAYMENT_TYPE          AS PAYMENTTYPE,
+           REMAIN_POINT          AS REMAINPOINT,
            ISSUANCE_LIMIT_DAYS   AS ISSUANCELIMITDAYS,
            FIXED_USABLE_COUNT    AS FIXEDUSABLECOUNT,
            FIXED_ISSUANCE_AMOUNT AS FIXEDISSUANCEAMOUNT,
@@ -18,13 +18,13 @@
            MODIFY_DATE           AS MODIFYDATE
     FROM TB_COUPON_CONFIG
   </select>
-  <select id="findAllByCompanySeq" parameterType="Long"
+  <select id="findAllByOrganSeq" parameterType="Long"
     resultType="kr.co.ooweat.coupon.domain.CouponConfig">
     SELECT SEQ,
            COMPANY_SEQ           AS COMPANYSEQ,
            ORGAN_SEQ             AS ORGANSEQ,
-           ISSUANCE_MAX_COUNT    AS ISSUANCEMAXCOUNT,
-           ISSUANCE_MAX_AMOUNT   AS ISSUANCEMAXAMOUNT,
+           PAYMENT_TYPE          AS PAYMENTTYPE,
+           REMAIN_POINT          AS REMAINPOINT,
            ISSUANCE_LIMIT_DAYS   AS ISSUANCELIMITDAYS,
            FIXED_USABLE_COUNT    AS FIXEDUSABLECOUNT,
            FIXED_ISSUANCE_AMOUNT AS FIXEDISSUANCEAMOUNT,
@@ -34,21 +34,21 @@
            CREATE_DATE           AS CREATEDATE,
            MODIFY_DATE           AS MODIFYDATE
     FROM TB_COUPON_CONFIG
-    WHERE COMPANY_SEQ = #{companySeq}
+    WHERE ORGAN_SEQ = #{organSeq}
   </select>
   <update id="save" parameterType="kr.co.ooweat.coupon.domain.CouponConfig">
-    INSERT INTO TB_COUPON_CONFIG (COMPANY_SEQ, ORGAN_SEQ, ISSUANCE_MAX_COUNT, ISSUANCE_MAX_AMOUNT,
-                                  ISSUANCE_LIMIT_DAYS
-                                    FIXED_USABLE_COUNT, FIXED_ISSUANCE_AMOUNT, MERCHANT_NAME,
-                                  BIN_CODE, USE_YN, CREATE_DATE)
-    VALUES (#{companySeq}, #{organSeq}, #{issuanceMaxCount}, #{issuanceMaxAmount}, #{issuanceLimitDays},
+    INSERT INTO TB_COUPON_CONFIG (COMPANY_SEQ, ORGAN_SEQ, PAYMENT_TYPE, REMAIN_POINT,
+                                  ISSUANCE_LIMIT_DAYS, FIXED_USABLE_COUNT, FIXED_ISSUANCE_AMOUNT,
+                                  MERCHANT_NAME,BIN_CODE, USE_YN, CREATE_DATE)
+    VALUES (#{companySeq}, #{organSeq}, #{paymentType}, #{remainPoint},
+            #{issuanceLimitDays},
             #{fixedUsableCount}, #{fixedIssuanceAmount}, #{merchantName}, #{binCode}, #{useYn},
             NOW()) ON DUPLICATE KEY
     UPDATE
       COMPANY_SEQ = #{companySeq},
       ORGAN_SEQ = #{organSeq},
-      ISSUANCE_MAX_COUNT = #{issuanceMaxCount},
-      ISSUANCE_MAX_AMOUNT = #{issuanceMaxAmount},
+      PAYMENT_TYPE = #{paymentType},
+      REMAIN_POINT = #{remainPoint},
       ISSUANCE_LIMIT_DAYS = #{issuanceLimitDays},
       FIXED_USABLE_COUNT = #{fixedUsableCount},
       FIXED_ISSUANCE_AMOUNT = #{fixedIssuanceAmount},
@@ -64,7 +64,7 @@
   </delete>
   <update id="consumeCoin" parameterType="Long">
     UPDATE TB_COUPON_CONFIG
-    SET ISSUANCE_MAX_COUNT = ISSUANCE_MAX_COUNT -1
+    SET REMAIN_POINT = #{consumePoint}
     WHERE COMPANY_SEQ = #{companySeq}
   </update>
 </mapper>

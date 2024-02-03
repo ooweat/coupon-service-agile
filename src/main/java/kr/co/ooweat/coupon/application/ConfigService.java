@@ -18,8 +18,8 @@ public class ConfigService {
         this.configMapper = configMapper;
     }
 
-    public ConfigResponse findConfigByCompanySeq(Long companySeq) {
-        return new ConfigResponse(configMapper.findAllByCompanySeq(companySeq));
+    public ConfigResponse findConfigByOrganSeq(Long organSeq) {
+        return new ConfigResponse(configMapper.findAllByOrganSeq(organSeq));
     }
 
     @Transactional
