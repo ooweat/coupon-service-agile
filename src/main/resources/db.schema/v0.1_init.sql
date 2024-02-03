@@ -124,8 +124,8 @@ CREATE TABLE TB_COUPON_ISSUANCE
     MEMBER_SEQ      MEDIUMINT                             NOT NULL COMMENT 'TB_MEMBER 의 SEQ',
     ISSUANCE_DATE   VARCHAR(8)                            NOT NULL COMMENT '발권일자: YYYYMMDD',
     EXPIRE_DATE     VARCHAR(8)                            NOT NULL COMMENT '만료일자: YYYYMMDD',
-    COUPON_NO       VARCHAR(20)                           NOT NULL COMMENT '쿠폰번호: BinCode + 쿠폰타입 + 13자리(YYMMDDHHmmssS)',
-    COUPON_TYPE     VARCHAR(1)                            NOT NULL COMMENT '쿠폰타입: 1자리',
+    COUPON_NO       VARCHAR(20)                           NOT NULL COMMENT '쿠폰번호: BinCode(6) + 쿠폰타입(1) + 12자리(YYMMDDHHmmss) + sequence(1)',
+    COUPON_TYPE     CHAR(1)   DEFAULT 'A'                 NOT NULL COMMENT '쿠폰타입: A: 1회권 / B: 금액권 ...',
     ISSUANCE_AMOUNT MEDIUMINT DEFAULT 0                   NOT NULL COMMENT '발권금액',
     REMAIN_AMOUNT   MEDIUMINT DEFAULT 0                   NOT NULL COMMENT '잔여금액',
     REMAIN_COUNT    SMALLINT  DEFAULT 0                   NOT NULL COMMENT '잔여사용가능횟수',
@@ -135,7 +135,7 @@ CREATE TABLE TB_COUPON_ISSUANCE
 	  E - EXPIRE    만료
 	  U - USE 사용
 	  H - Hide 숨김(제거)',
-    SEND_TYPE       CHAR      DEFAULT 'M'                 NOT NULL COMMENT '발송타입: M - 메일 / S - SMS / K - 카카오톡',
+    SEND_TYPE       CHAR(1)   DEFAULT 'E'                 NOT NULL COMMENT '발송타입: E - 이메일 / M - MMS / S - SMS / K - 카카오톡',
     SEND_INFO       VARCHAR(200)                          NULL COMMENT '수신정보: 암호화',
     SEND_COUNT      SMALLINT  DEFAULT 1                   NOT NULL COMMENT '알림톡 발송횟수: 발행시 기본 1',
     CREATE_DATE     DATETIME  DEFAULT CURRENT_TIMESTAMP() NOT NULL COMMENT '생성일자',
@@ -151,7 +151,6 @@ CREATE INDEX IDX_TB_COUPON_ISSUANCE03
     ON TB_COUPON_ISSUANCE (ISSUANCE_DATE);
 CREATE INDEX IDX_TB_COUPON_ISSUANCE04
     ON TB_COUPON_ISSUANCE (EXPIRE_DATE);
-
 
 DROP TABLE TB_COUPON_ISSUANCE;
 DROP TABLE TB_COUPON_CONFIG;
