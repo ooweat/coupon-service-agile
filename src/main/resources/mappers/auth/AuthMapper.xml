@@ -50,6 +50,6 @@
                MODIFY_DATE AS MODIFYDATE
         FROM TB_MEMBER
         WHERE ID = #{userId}
-          AND PASSWORD = #{userPass}
+          AND PASSWORD = MD5(#{userPass})
     </select>
 </mapper>
