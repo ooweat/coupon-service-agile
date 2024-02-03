@@ -1,6 +1,7 @@
 package kr.co.ooweat.coupon.application;
 
 import static kr.co.ooweat.dummey.IssuanceFixture.ISSUANCE_1;
+import static kr.co.ooweat.dummey.MemberFixture.KORAIL_3;
 import static kr.co.ooweat.dummey.MemberFixture.OOWEAT;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -33,7 +34,7 @@ public class IssuanceServiceTest {
     @DisplayName("로그인")
     @Test
     Member 로그인() {
-        Member member = authService.login(OOWEAT.createLogin());
+        Member member = authService.login(KORAIL_3.createLogin());
         return member;
     }
     
@@ -44,9 +45,7 @@ public class IssuanceServiceTest {
         // given
         Member member = 로그인();
         // when
-        ConfigResponse configResponse = configService.findConfigByOrganSeq(
-            member.getCompanySeq());
-        
+        ConfigResponse configResponse = configService.findConfigByOrganSeq(member.getOrganSeq());
         return configResponse;
     }
     
@@ -57,7 +56,6 @@ public class IssuanceServiceTest {
         Member member = 로그인();
         ConfigResponse configResponse = 쿠폰_설정_조회();
         
-        log.info("bincode: {}", configResponse.getBinCode());
         //Request 에 아래에 대한 정보가 모두 넘어올 것이라 생각한다.
         // given & when
         //TODO: 일부 데이터에 값을 넣지 않을 경우, config 기본 값에서 처리
@@ -66,30 +64,15 @@ public class IssuanceServiceTest {
             configResponse.getOrganSeq(),
             member.getSeq(),
             configResponse.getBinCode(),
+            ISSUANCE_1.getCouponType(),
             ISSUANCE_1.getExpireDate(),
             ISSUANCE_1.getIssuanceAmount(),
             ISSUANCE_1.getRemainAmount(),
             ISSUANCE_1.getRemainCount(),
             ISSUANCE_1.getStatus(),
             ISSUANCE_1.getSendType(),
-            ISSUANCE_1.getSendInfo(),
-            ISSUANCE_1.getSendCount()
+            ISSUANCE_1.getSendInfo()
         );
-        //샘플 데이터
-        /*IssuanceRequest issuanceRequest = new IssuanceRequest(
-            ISSUANCE_1.getCompanySeq(),
-            ISSUANCE_1.getOrganSeq(),
-            ISSUANCE_1.getMemberSeq(),
-            ISSUANCE_1.getBinCode(),
-            ISSUANCE_1.getExpireDate(),
-            ISSUANCE_1.getIssuanceAmount(),
-            ISSUANCE_1.getRemainAmount(),
-            ISSUANCE_1.getRemainCount(),
-            ISSUANCE_1.getStatus(),
-            ISSUANCE_1.getSendType(),
-            ISSUANCE_1.getSendInfo(),
-            ISSUANCE_1.getSendCount()
-        );*/
         // then
         IssuanceResponse response = issuanceService.issuance(issuanceRequest);
         log.info(response.getCouponNo());
@@ -104,6 +87,9 @@ public class IssuanceServiceTest {
         IssuanceRequest issuanceRequest = new IssuanceRequest(
             ISSUANCE_1.getCompanySeq(),
             ISSUANCE_1.getOrganSeq(),
+            ISSUANCE_1.getCouponType(),
+            ISSUANCE_1.getSendType(),
+            ISSUANCE_1.getSendInfo(),
             Util.dateUtils().yyyyMMdd(0),
             Util.dateUtils().yyyyMMdd(0)
         );
