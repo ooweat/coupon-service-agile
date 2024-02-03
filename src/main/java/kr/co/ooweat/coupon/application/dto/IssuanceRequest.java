@@ -5,11 +5,12 @@ import lombok.Getter;
 
 @Getter
 public class IssuanceRequest extends BaseTimeEntity {
+    
     private Long companySeq;
     private Long organSeq;
     private Long memberSeq;
     private String binCode;
-    private String couponType;
+    private char couponType;
     private Long issuanceAmount;
     private Long remainAmount;
     private int remainCount;
@@ -21,30 +22,15 @@ public class IssuanceRequest extends BaseTimeEntity {
     private String startDate;
     private String endDate;
     
-    public IssuanceRequest(final Long companySeq, final Long organSeq, final String startDate, final String endDate) {
+    public IssuanceRequest(final Long companySeq, final Long organSeq, final char couponType,
+        final char sendType, final String sendInfo, final String startDate, final String endDate) {
         this.companySeq = companySeq;
         this.organSeq = organSeq;
-        this.startDate = startDate;
-        this.endDate = endDate;
-    }
-    
-    
-    public IssuanceRequest(Long companySeq, Long organSeq, Long memberSeq, String binCode, String couponType, String expireDate,
-        Long issuanceAmount, Long remainAmount, int remainCount, char status, char sendType,
-        String sendInfo, int sendCount) {
-        this.companySeq = companySeq;
-        this.organSeq = organSeq;
-        this.memberSeq = memberSeq;
-        this.binCode = binCode;
         this.couponType = couponType;
-        this.issuanceAmount = issuanceAmount;
-        this.remainAmount = remainAmount;
-        this.remainCount = remainCount;
-        this.expireDate = expireDate;
-        this.status = status;
         this.sendType = sendType;
         this.sendInfo = sendInfo;
-        this.sendCount = sendCount;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
     
     public IssuanceRequest(char status, String couponNo) {
@@ -52,8 +38,20 @@ public class IssuanceRequest extends BaseTimeEntity {
         this.binCode = couponNo;
     }
     
-    public IssuanceRequest(Long companySeq, Long organSeq, Long seq, String binCode, String expireDate, long issuanceAmount, long remainAmount, int remainCount,
-        char status, char sendType, String sendInfo, int sendCount) {
-        super();
+    public IssuanceRequest(Long companySeq, Long organSeq, Long memberSeq, String binCode, char couponType,
+        String expireDate, long issuanceAmount, long remainAmount, int remainCount,
+        char status, char sendType, String sendInfo) {
+        this.companySeq = companySeq;
+        this.organSeq = organSeq;
+        this.memberSeq = memberSeq;
+        this.binCode = binCode;
+        this.couponType = couponType;
+        this.expireDate = expireDate;
+        this.issuanceAmount = issuanceAmount;
+        this.remainAmount = remainAmount;
+        this.remainCount = remainCount;
+        this.status = status;
+        this.sendType = sendType;
+        this.sendInfo = sendInfo;
     }
 }

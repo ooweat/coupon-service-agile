@@ -18,7 +18,7 @@ public class ConfigService {
         this.configMapper = configMapper;
     }
 
-    public ConfigResponse findConfigByOrganSeq(Long organSeq) {
+    public ConfigResponse findConfigByOrganSeq(final Long organSeq) {
         return new ConfigResponse(configMapper.findAllByOrganSeq(organSeq));
     }
 

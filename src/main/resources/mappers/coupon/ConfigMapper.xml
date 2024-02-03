@@ -62,7 +62,7 @@
     FROM TB_COUPON_CONFIG
     WHERE SEQ = #{seq}
   </delete>
-  <update id="consumeCoin" parameterType="Long">
+  <update id="consumePoint" parameterType="Long">
     UPDATE TB_COUPON_CONFIG
     SET REMAIN_POINT = #{consumePoint}
     WHERE COMPANY_SEQ = #{companySeq}

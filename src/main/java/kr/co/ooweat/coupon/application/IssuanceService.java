@@ -1,11 +1,9 @@
 package kr.co.ooweat.coupon.application;
 
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import kr.co.ooweat.coupon.application.dto.IssuanceRequest;
 import kr.co.ooweat.coupon.application.dto.IssuanceResponse;
-import kr.co.ooweat.coupon.application.dto.StatusResponse;
 import kr.co.ooweat.coupon.domain.Issuance;
 import kr.co.ooweat.coupon.mappers.ConfigMapper;
 import kr.co.ooweat.coupon.mappers.IssuanceMapper;
@@ -22,26 +20,27 @@ public class IssuanceService {
         this.configMapper = configMapper;
     }
     
-    public IssuanceResponse issuance(IssuanceRequest issuanceRequest) throws NoSuchAlgorithmException {
+    public IssuanceResponse issuance(IssuanceRequest issuanceRequest){
         final Issuance issuance = new Issuance(issuanceRequest,
-            generateCouponNo(issuanceRequest.getBinCode()));
-        
+            generateCouponNo(issuanceRequest.getBinCode(), issuanceRequest.getCouponType()));
+        System.out.println(issuanceRequest.getCompanySeq());
+        System.out.println(issuance.getCompanySeq());
+        System.out.println(issuance.getCouponNo());
         /*
         TODO:
          Q1. 수익구조?
-         A1. 코인 개념 도입: 쿠폰을 1회 발권할 때마다 코인 차감 처리 (포인트를 쓰려고 했으나 이 후 포인트를 쓸 여지를 남김)
-         Q2. 코인은 선불 개념, 그렇다면 후불 개념은?
+         A1. 포인트 개념 도입: 쿠폰을 1회 발권할 때마다 포인트 차감
         */
         if(issuanceMapper.issuance(issuance)){
             /*
             TODO:
              Q1. 소속 단위로 소모할 것인가? 계정단위로 소모할 것인가?
-             //issuanceMapper.consumeCoin(issuance.getCompanySeq());
-             //issuanceMapper.consumeCoin(issuance.getMemberSeq());
+             -> 조직 단위로 소모한다.
                 Q1-1. 전체 플랫폼을 제공할 것인가? 서비스를 제공할 것인가? -> 소속
                 Q1-2. 플랫폼 제공 시, 결제는 본사가 일괄로 진행한다.
             */
-            configMapper.consumeCoin(issuance.getCompanySeq());
+            Long consumePoint = 0L;
+            configMapper.consumePoint(issuance.getOrganSeq(), consumePoint);
         };
         
         return new IssuanceResponse(issuance);
@@ -60,14 +59,12 @@ public class IssuanceService {
     /*
     * @param binCode
     * @DESC: 쿠폰 번호 생성
-    *    binCode + coupontype + YYMMddHHmmss + 1-9 random
+    *    binCode(6) + coupontype(1) + YYMMddHHmmss(12) + 1to9 Cycle Sequence(1)
     * */
-    private String generateCouponNo(String binCode) {
-        String couponNo = "";
-        binCode += Util.dateUtils().now("YYMMddHHmmssS");
-        couponNo+=binCode;
-        issuanceMapper.findByCouponNo(binCode);
-        return binCode;
+    private String generateCouponNo(String binCode, char couponType) {
+        String couponNo = binCode + couponType + Util.dateUtils().now("YYMMddHHmmss");
+        issuanceMapper.findByCouponNo(couponNo);
+        return couponNo;
     }
     
     public IssuanceResponse reSendByCouponNo(String couponNo) {

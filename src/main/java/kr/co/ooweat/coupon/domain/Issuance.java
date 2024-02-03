@@ -17,12 +17,12 @@ public class Issuance extends BaseTimeEntity {
     private String issuanceDate;
     private String expireDate;
     private String couponNo;
-    private String couponType;
+    private char couponType;
     private Long issuanceAmount;
     private Long remainAmount;
     private int remainCount;
     private char status;
-    private char sendType;
+    private char sendType;  //발송타입: E- 이메일 / M - MMS / S - SMS / K - 카카오톡
     private String sendInfo;
     private int sendCount;
     private String companyName;
@@ -45,9 +45,5 @@ public class Issuance extends BaseTimeEntity {
         this.sendType = issuanceRequest.getSendType();
         this.sendInfo = issuanceRequest.getSendInfo();
         this.sendCount = issuanceRequest.getSendCount();
-    }
-    
-    public Issuance(IssuanceRequest issuanceRequest) {
-    
     }
 }

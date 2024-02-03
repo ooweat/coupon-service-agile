@@ -10,5 +10,5 @@ public interface ConfigMapper {
     CouponConfig findAllByOrganSeq(Long organSeq);
     void save(CouponConfig couponConfig);
     void deleteBySeq(Long seq);
-    boolean consumeCoin(Long companySeq);
+    boolean consumePoint(Long companySeq, Long consumePoint);
 }

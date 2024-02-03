@@ -67,7 +67,7 @@
     </if>
 
   </select>
-  <update id="save" parameterType="kr.co.ooweat.coupon.domain.Issuance">
+  <update id="issuance" parameterType="kr.co.ooweat.coupon.domain.Issuance">
     INSERT INTO TB_COUPON_ISSUANCE (COMPANY_SEQ, ORGAN_SEQ, MEMBER_SEQ, ISSUANCE_DATE, EXPIRE_DATE,
                                     COUPON_NO, COUPON_TYPE,
                                     ISSUANCE_AMOUNT, REMAIN_AMOUNT, REMAIN_COUNT, STATUS, SEND_TYPE,
