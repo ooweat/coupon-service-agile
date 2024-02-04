@@ -3,10 +3,30 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.ooweat.coupon.mappers.IssuanceMapper">
   <select id="findByCouponNo" parameterType="string"
-    resultType="boolean">
-    SELECT IF(COUNT(*) = 1, 1, 0)
-    FROM TB_COUPON_ISSUANCE
-    WHERE COUPON_NO = #{couponNo}
+    resultType="kr.co.ooweat.coupon.domain.Issuance">
+    SELECT A.SEQ,
+           C.NAME AS COMPANYNAME,
+           O.NAME AS ORGANNAME,
+           M.NAME AS MEMBERNAME,
+           A.ISSUANCE_DATE AS ISSUANCEDATE,
+           A.EXPIRE_DATE AS EXPIREDATE,
+           A.COUPON_NO AS COUPONNO,
+           A.COUPON_TYPE AS COUPONTYPE,
+           A.ISSUANCE_AMOUNT AS ISSUANCEAMOUNT,
+           A.REMAIN_AMOUNT AS REMAINAMOUNT,
+           A.REMAIN_COUNT AS REMAINCOUNT,
+           A.STATUS AS STATUS,
+           A.SEND_TYPE AS SENDTYPE,
+           A.SEND_INFO AS SENDINFO,
+           A.SEND_COUNT AS SENDCOUNT,
+           A.CREATE_DATE AS CREATEDATE,
+           A.MODIFY_DATE AS MODIFYDATE
+    FROM TB_COUPON_ISSUANCE A
+             LEFT JOIN TB_COMPANY C ON A.COMPANY_SEQ = C.SEQ
+             LEFT JOIN TB_ORGANIZATION O ON A.ORGAN_SEQ = O.SEQ
+             LEFT JOIN TB_MEMBER M ON A.MEMBER_SEQ = M.SEQ
+    WHERE 1=1
+      AND A.COUPON_NO = #{couponNo}
   </select>
   <select id="findAllIssuances" resultType="kr.co.ooweat.coupon.domain.Issuance">
     SELECT SEQ,

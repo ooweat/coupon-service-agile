@@ -37,7 +37,7 @@ public class IssuanceServiceTest {
         Member member = authService.login(KORAIL_3.createLogin());
         return member;
     }
-    
+
     @DisplayName("쿠폰 설정 조회")
     @Test
     ConfigResponse 쿠폰_설정_조회() {
@@ -48,7 +48,19 @@ public class IssuanceServiceTest {
         ConfigResponse configResponse = configService.findConfigByOrganSeq(member.getOrganSeq());
         return configResponse;
     }
-    
+
+    @DisplayName("쿠폰 조회")
+    @Test
+    void 쿠폰_조회() {
+        //인증된 멤버가 자신의 설정 정보를 조회한다.
+        // given
+        String couponNo = "525252A2402041803418";
+        // when
+        IssuanceResponse issuanceResponse = issuanceService.findByCouponNo(couponNo);
+                assertThat(issuanceResponse.getCouponNo()).isEqualTo(couponNo);
+    }
+
+
     @DisplayName("쿠폰 발권")
     @Test
     void 쿠폰_발권() throws NoSuchAlgorithmException {

@@ -5,6 +5,7 @@ import kr.co.ooweat.coupon.application.dto.IssuanceResponse;
 import kr.co.ooweat.coupon.domain.Issuance;
 import kr.co.ooweat.coupon.mappers.IssuanceMapper;
 import kr.co.ooweat.utils.Util;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +24,10 @@ public class IssuanceService {
     }
 
     @Transactional(readOnly = true)
+    public IssuanceResponse findByCouponNo(final String couponNo) {
+        return new IssuanceResponse(issuanceMapper.findByCouponNo(couponNo));
+    }
+    @Transactional(readOnly = true)
     public IssuanceResponse issuance(IssuanceRequest issuanceRequest) {
         final Issuance issuance = new Issuance(issuanceRequest,
                 generateCouponNo(issuanceRequest.getBinCode(), issuanceRequest.getCouponType()));
@@ -40,17 +45,16 @@ public class IssuanceService {
          Q1. 수익구조?
          A1. 포인트 개념 도입: 쿠폰을 1회 발권할 때마다 포인트 차감
         */
-            sendCoupon(issuance);
+            sendCoupon(issuance.getSendType(), issuance.getOrganSeq());
         }
-        ;
 
         return new IssuanceResponse(issuance);
     }
 
-    private void sendCoupon(Issuance issuance) {
+    private void sendCoupon(char sendType, Long organSeq) {
         boolean success = false;
         Long consumePoint = 0L;
-        switch (issuance.getSendType()){
+        switch (sendType){
             case 'E':
                 //E-mail 전송 로직
                 success = true;
@@ -69,7 +73,7 @@ public class IssuanceService {
         }
 
         if(success){
-            configService.consumePoint(issuance.getOrganSeq(), consumePoint);
+            configService.consumePoint(organSeq, consumePoint);
         }
     }
 
@@ -90,7 +94,6 @@ public class IssuanceService {
      * */
     private String generateCouponNo(String binCode, char couponType) {
         String couponNo = binCode + couponType + Util.dateUtils().now("YYMMddHHmmss");
-        //couponNo = issuanceMapper.findByCouponNo(couponNo);
         return couponNo;
     }
 
