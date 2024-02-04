@@ -33,6 +33,7 @@ public class ConfigService {
         configMapper.deleteBySeq(seq);
     }
 
+    @Transactional(readOnly = true)
     public List<ConfigResponse> findAllConfigs() {
         List<CouponConfig> findAllConfigs = configMapper.findAllConfigs();
         List<ConfigResponse> configResponse = new ArrayList<>();

@@ -1,8 +1,9 @@
 package kr.co.ooweat.coupon.mappers;
 
-import java.util.List;
 import kr.co.ooweat.coupon.domain.CouponConfig;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 @Mapper
 public interface ConfigMapper {
@@ -10,5 +11,5 @@ public interface ConfigMapper {
     CouponConfig findAllByOrganSeq(Long organSeq);
     void save(CouponConfig couponConfig);
     void deleteBySeq(Long seq);
-    boolean consumePoint(Long companySeq, Long consumePoint);
+    boolean consumePoint(Long organSeq, Long consumePoint);
 }
