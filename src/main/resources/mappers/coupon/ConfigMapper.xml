@@ -64,7 +64,7 @@
   </delete>
   <update id="consumePoint" parameterType="Long">
     UPDATE TB_COUPON_CONFIG
-    SET REMAIN_POINT = #{consumePoint}
-    WHERE COMPANY_SEQ = #{companySeq}
+    SET REMAIN_POINT = REMAIN_POINT-#{consumePoint}
+    WHERE ORGAN_SEQ = #{organSeq}
   </update>
 </mapper>

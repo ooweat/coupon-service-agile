@@ -17,7 +17,7 @@ public class ConfigService {
     public ConfigService(ConfigMapper configMapper) {
         this.configMapper = configMapper;
     }
-
+    @Transactional(readOnly = true)
     public ConfigResponse findConfigByOrganSeq(final Long organSeq) {
         return new ConfigResponse(configMapper.findAllByOrganSeq(organSeq));
     }
@@ -42,5 +42,11 @@ public class ConfigService {
         }
 
         return configResponse;
+    }
+
+    @Transactional
+    public void consumePoint(Long organSeq, Long consumePoint) {
+        //configMapper.consumePoint(new ConfigRequest(organSeq, consumePoint));
+        configMapper.consumePoint(organSeq, consumePoint);
     }
 }

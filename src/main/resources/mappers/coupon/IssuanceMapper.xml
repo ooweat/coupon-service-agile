@@ -67,13 +67,14 @@
     </if>
 
   </select>
-  <update id="issuance" parameterType="kr.co.ooweat.coupon.domain.Issuance">
+  <insert id="issuance" parameterType="kr.co.ooweat.coupon.domain.Issuance">
     INSERT INTO TB_COUPON_ISSUANCE (COMPANY_SEQ, ORGAN_SEQ, MEMBER_SEQ, ISSUANCE_DATE, EXPIRE_DATE,
                                     COUPON_NO, COUPON_TYPE,
                                     ISSUANCE_AMOUNT, REMAIN_AMOUNT, REMAIN_COUNT, STATUS, SEND_TYPE,
                                     SEND_INFO, SEND_COUNT)
-    VALUES (#{companySeq}, #{organSeq}, #{memberSeq}, #{issuanceDate}, #{expireDate}, #{couponNo},
-            #{couponType}, #{issuanceAmount}, #{remainAmount}, #{remainCount}, #{status}, #{sendType},
+    VALUES (#{companySeq}, #{organSeq}, #{memberSeq}, #{issuanceDate}, #{expireDate},
+            CONCAT(#{couponNo}, (nextval('COUPON'))), #{couponType},
+            #{issuanceAmount}, #{remainAmount}, #{remainCount}, #{status}, #{sendType},
             #{sendInfo}, #{sendCount}) ON DUPLICATE KEY
     UPDATE
       COMPANY_SEQ = #{companySeq},
@@ -90,7 +91,13 @@
       SEND_INFO = #{sendInfo},
       SEND_COUNT = #{sendCount},
       MODIFY_DATE = NOW()
-  </update>
+      <selectKey keyProperty="couponNo" resultType="string" order="AFTER">
+          SELECT COUPON_NO AS COUPONNO
+          FROM TB_COUPON_ISSUANCE
+          WHERE ISSUANCE_DATE = #{issuanceDate} AND EXPIRE_DATE = #{expireDate}
+          AND COUPON_NO LIKE CONCAT(#{couponNo}, '%')
+      </selectKey>
+  </insert>
   <update id="updateStatusByCouponNo" parameterType="kr.co.ooweat.coupon.domain.Issuance">
     UPDATE TB_COUPON_ISSUANCE
     SET STATUS = #{status},
