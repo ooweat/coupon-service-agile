@@ -75,7 +75,6 @@ public class IssuanceServiceTest {
         );
         // then
         IssuanceResponse response = issuanceService.issuance(issuanceRequest);
-        log.info(response.getCouponNo());
     }
     
     @DisplayName("발권내역 기간 조회")

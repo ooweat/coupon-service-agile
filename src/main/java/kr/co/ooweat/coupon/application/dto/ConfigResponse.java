@@ -3,19 +3,16 @@ package kr.co.ooweat.coupon.application.dto;
 import kr.co.ooweat.coupon.domain.CouponConfig;
 import lombok.Getter;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Getter
 public class ConfigResponse {
     private Long seq;
     private Long companySeq;
     private Long organSeq;
     private char paymentType;
-    private String remainPoint;
-    private String issuanceLimitDays;
-    private String fixedUsableCount;
-    private String fixedIssuanceAmount;
+    private Long remainPoint;
+    private int issuanceLimitDays;
+    private int fixedUsableCount;
+    private Long fixedIssuanceAmount;
     private String merchantName;
     private String binCode;
     private char useYn;

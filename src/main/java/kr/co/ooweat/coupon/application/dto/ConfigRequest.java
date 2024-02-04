@@ -10,10 +10,10 @@ public class ConfigRequest extends BaseTimeEntity {
     private Long companySeq;
     private Long organSeq;
     private char paymentType;
-    private String remainPoint;
-    private String issuanceLimitDays;
-    private String fixedUsableCount;
-    private String fixedIssuanceAmount;
+    private Long remainPoint;
+    private int issuanceLimitDays;
+    private int fixedUsableCount;
+    private Long fixedIssuanceAmount;
     private String merchantName;
     private String binCode;
     private char useYn;
@@ -32,8 +32,8 @@ public class ConfigRequest extends BaseTimeEntity {
     }
     
     public ConfigRequest(final Long seq, final Long companySeq, final Long organSeq,
-        final char paymentType, final String remainPoint, final String issuanceLimitDays,
-        final String fixedUsableCount, final String fixedIssuanceAmount, final String merchantName,
+        final char paymentType, final Long remainPoint, final int issuanceLimitDays,
+        final int fixedUsableCount, final Long fixedIssuanceAmount, final String merchantName,
         final String binCode, final char useYn) {
         this.seq = seq;
         this.companySeq = companySeq;
@@ -61,5 +61,10 @@ public class ConfigRequest extends BaseTimeEntity {
         this.merchantName = configResponse.getMerchantName();
         this.binCode = configResponse.getBinCode();
         this.useYn = configResponse.getUseYn();
+    }
+
+    public ConfigRequest(Long organSeq, Long consumePoint) {
+        this.organSeq = organSeq;
+        this.remainPoint = getRemainPoint()-consumePoint;
     }
 }

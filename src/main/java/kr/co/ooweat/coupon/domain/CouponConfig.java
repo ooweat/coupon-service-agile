@@ -14,10 +14,10 @@ public class CouponConfig extends BaseTimeEntity {
     private Long companySeq;
     private Long organSeq;
     private char paymentType;
-    private String remainPoint;
-    private String issuanceLimitDays;
-    private String fixedUsableCount;
-    private String fixedIssuanceAmount;
+    private Long remainPoint;
+    private int issuanceLimitDays;
+    private int fixedUsableCount;
+    private Long fixedIssuanceAmount;
     private String merchantName;
     private String binCode;
     private char useYn;
